@@ -1,0 +1,522 @@
+This is pdfTeX, Version 3.14159-1.10b (Web2C 7.4.5) (format=pdflatex 2006.1.9)  24 MAR 2007 14:20
+**amelia
+(./amelia.tex{/usr/share/texmf/pdftex/config/pdftex.cfg}
+LaTeX2e <2001/06/01>
+Babel <v3.7h> and hyphenation patterns for american, french, german, ngerman, n
+ohyphenation, loaded.
+(/usr/share/texmf/tex/latex/base/article.cls
+Document Class: article 2001/04/21 v1.4e Standard LaTeX document class
+(/usr/share/texmf/tex/latex/base/size12.clo
+File: size12.clo 2001/04/21 v1.4e Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/usr/share/latex2html/texinputs/html.sty
+(/usr/share/texmf/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2003/01/22 v6.73n Hypertext links for LaTeX
+
+(/usr/share/texmf/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+\@linkdim=\dimen103
+\Hy@linkcounter=\count87
+\Hy@pagecounter=\count88
+
+(/usr/share/texmf/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2003/01/22 v6.73n Hyperref: PDFDocEncoding definition (HO)
+)
+(/usr/share/texmf/tex/latex/config/hyperref.cfg
+File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive and teTeX
+)
+Package hyperref Info: Hyper figures OFF on input line 1792.
+Package hyperref Info: Link nesting OFF on input line 1797.
+Package hyperref Info: Hyper index ON on input line 1800.
+Package hyperref Info: Plain pages ON on input line 1805.
+Package hyperref Info: Backreferencing OFF on input line 1812.
+
+Implicit mode ON; LaTeX internals redefined
+Package hyperref Info: Bookmarks ON on input line 1916.
+(/usr/share/latex2html/texinputs/url.sty
+Package: url 1999/03/02  ver 1.4  Verb mode for urls, email addresses, and file
+ names
+)
+LaTeX Info: Redefining \url on input line 2055.
+\Fld@menulength=\count89
+\Field@Width=\dimen104
+\Fld@charsize=\dimen105
+\Choice@toks=\toks15
+\Field@toks=\toks16
+Package hyperref Info: Hyper figures OFF on input line 2513.
+Package hyperref Info: Link nesting OFF on input line 2518.
+Package hyperref Info: Hyper index ON on input line 2521.
+Package hyperref Info: backreferencing OFF on input line 2528.
+Package hyperref Info: Link coloring OFF on input line 2533.
+\c@Item=\count90
+\c@Hfootnote=\count91
+)
+*hyperref using default driver hpdftex*
+(/usr/share/texmf/tex/latex/hyperref/hpdftex.def
+File: hpdftex.def 2003/01/22 v6.73n Hyperref driver for pdfTeX
+
+(/usr/share/texmf/tex/latex/psnfss/pifont.sty
+Package: pifont 2002/09/08 PSNFSS-v9.0a Pi font support (SPQR) 
+LaTeX Font Info:    Try loading font information for U+pzd on input line 62.
+
+(/usr/share/texmf/tex/latex/psnfss/upzd.fd
+File: upzd.fd 2001/06/04 font definitions for U/pzd.
+)
+LaTeX Font Info:    Try loading font information for U+psy on input line 63.
+
+(/usr/share/texmf/tex/latex/psnfss/upsy.fd
+File: upsy.fd 2001/06/04 font definitions for U/psy.
+))
+\Fld@listcount=\count92
+\@outlinefile=\write3
+)
+Package: html 1999/07/19 v1.38 hypertext commands for latex2html (nd, hws, rrm)
+
+\c@lpart=\count93
+\c@lchapter=\count94
+\c@chapter=\count95
+\c@lsection=\count96
+\c@lsubsection=\count97
+\c@lsubsubsection=\count98
+\c@lparagraph=\count99
+\c@lsubparagraph=\count100
+\c@lsubsubparagraph=\count101
+\ptrfile=\write4
+)
+(/usr/share/texmf/tex/latex/tools/dcolumn.sty
+Package: dcolumn 2001/05/28 v1.06 decimal alignment package (DPC)
+
+(/usr/share/texmf/tex/latex/tools/array.sty
+Package: array 1998/05/13 v2.3m Tabular extension package (FMi)
+\col@sep=\dimen106
+\extrarowheight=\dimen107
+\NC@list=\toks17
+\extratabsurround=\skip43
+\backup@length=\skip44
+))
+(/usr/share/texmf/tex/latex/tools/longtable.sty
+Package: longtable 2000/10/22 v4.10 Multi-page Table package (DPC)
+\LTleft=\skip45
+\LTright=\skip46
+\LTpre=\skip47
+\LTpost=\skip48
+\LTchunksize=\count102
+\LTcapwidth=\dimen108
+\LT@head=\box26
+\LT@firsthead=\box27
+\LT@foot=\box28
+\LT@lastfoot=\box29
+\LT@cols=\count103
+\LT@rows=\count104
+\c@LT@tables=\count105
+\c@LT@chunks=\count106
+\LT@p@ftn=\toks18
+)
+(/nfs/fs1/home/K/king/texinputs/natbib.sty
+Package: natbib 1999/02/25 6.9 (PWD)
+\bibhang=\skip49
+\bibsep=\skip50
+LaTeX Info: Redefining \cite on input line 486.
+\c@NAT@ctr=\count107
+)
+(/usr/share/texmf/tex/latex/misc/vmargin.sty
+Package: vmargin 2000/08/01
+
+Package: vmargin 2000/08/01 V2.3 (VK) set document margins
+\PaperWidth=\dimen109
+\PaperHeight=\dimen110
+) (/usr/share/texmf/tex/latex/graphics/graphicx.sty
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texmf/tex/latex/graphics/graphics.sty
+Package: graphics 2001/07/07 v1.0n Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texmf/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(/usr/share/texmf/tex/latex/config/graphics.cfg
+File: graphics.cfg 2001/08/31 v1.1 graphics configuration of teTeX/TeXLive
+)
+Package graphics Info: Driver file: pdftex.def on input line 80.
+
+(/usr/share/texmf/tex/latex/graphics/pdftex.def
+File: pdftex.def 2002/06/19 v0.03k graphics/color for pdftex
+\Gread@gobject=\count108
+))
+\Gin@req@height=\dimen111
+\Gin@req@width=\dimen112
+)
+(/usr/share/texmf/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2000/07/18 v2.13 AMS math features
+\@mathmargin=\skip51
+
+For additional information on amsmath, use the `?' option.
+(/usr/share/texmf/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01
+
+(/usr/share/texmf/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0
+\@emptytoks=\toks19
+\ex@=\dimen113
+))
+(/usr/share/texmf/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d
+\pmbraise@=\dimen114
+)
+(/usr/share/texmf/tex/latex/amsmath/amsopn.sty
+Package: amsopn 1999/12/14 v2.01 operator names
+)
+\inf@bad=\count109
+LaTeX Info: Redefining \frac on input line 211.
+\uproot@=\count110
+\leftroot@=\count111
+LaTeX Info: Redefining \overline on input line 307.
+\classnum@=\count112
+\DOTSCASE@=\count113
+LaTeX Info: Redefining \ldots on input line 379.
+LaTeX Info: Redefining \dots on input line 382.
+LaTeX Info: Redefining \cdots on input line 467.
+\Mathstrutbox@=\box30
+\strutbox@=\box31
+\big@size=\dimen115
+LaTeX Font Info:    Redeclaring font encoding OML on input line 567.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 568.
+\macc@depth=\count114
+\c@MaxMatrixCols=\count115
+\dotsspace@=\muskip10
+\c@parentequation=\count116
+\dspbrk@lvl=\count117
+\tag@help=\toks20
+\row@=\count118
+\column@=\count119
+\maxfields@=\count120
+\andhelp@=\toks21
+\eqnshift@=\dimen116
+\alignsep@=\dimen117
+\tagshift@=\dimen118
+\tagwidth@=\dimen119
+\totwidth@=\dimen120
+\lineht@=\dimen121
+\@envbody=\toks22
+\multlinegap=\skip52
+\multlinetaggap=\skip53
+\mathdisplay@stack=\toks23
+LaTeX Info: Redefining \[ on input line 2666.
+LaTeX Info: Redefining \] on input line 2667.
+)
+(/usr/share/texmf/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2002/01/22 v2.2d
+
+(/usr/share/texmf/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2001/10/25 v2.2f
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 132.
+)) (./amelia.aux)
+\openout1 = `amelia.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+Package hyperref Info: Link coloring OFF on input line 32.
+
+(/usr/share/texmf/tex/latex/hyperref/nameref.sty
+Package: nameref 2001/01/27 v2.19 Cross-referencing by name of section
+\c@section@level=\count121
+)
+LaTeX Info: Redefining \ref on input line 32.
+LaTeX Info: Redefining \pageref on input line 32.
+ (./amelia.out) (./amelia.out)
+\openout3 = `amelia.out'.
+
+(/usr/share/texmf/tex/context/base/supp-pdf.tex
+(/usr/share/texmf/tex/context/base/supp-mis.tex
+loading : Context Support Macros / Missing
+\protectiondepth=\count122
+\scratchcounter=\count123
+\scratchtoks=\toks24
+\scratchdimen=\dimen122
+\scratchskip=\skip54
+\scratchmuskip=\muskip11
+\scratchbox=\box32
+\scratchread=\read1
+\scratchwrite=\write5
+\zeropoint=\dimen123
+\minusone=\count124
+\thousandpoint=\dimen124
+\emptytoks=\toks25
+\nextbox=\box33
+\nextdepth=\dimen125
+\everyline=\toks26
+\!!counta=\count125
+\!!countb=\count126
+\recursecounter=\count127
+)
+loading : Context Support Macros / PDF
+\nofMPsegments=\count128
+\nofMParguments=\count129
+\everyMPtoPDFconversion=\toks27
+)
+LaTeX Font Info:    Try loading font information for U+msa on input line 34.
+ (/usr/share/texmf/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2002/01/19 v2.2g AMS font definitions
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 34.
+
+(/usr/share/texmf/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2002/01/19 v2.2g AMS font definitions
+)
+LaTeX Font Info:    Try loading font information for U+euf on input line 34.
+
+(/usr/share/texmf/tex/latex/amsfonts/ueuf.fd
+File: ueuf.fd 2002/01/19 v2.2g AMS font definitions
+) [1
+
+{/usr/share/texmf/dvips/config/pdftex.map}] (./amelia.toc
+! pdfTeX warning (ext4): destination with the same identifier (name{page.1}) ha
+s been already used, duplicate ignored
+<to be read again> 
+                   \penalty 
+l.36 ...{13}AmeliaView Menu Guide}{28}{section.13}
+                                                   [1])
+\tf@toc=\write6
+\openout6 = `amelia.toc'.
+
+ [2]
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 96.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 96.
+
+[3]
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 153.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 153.
+
+[4]
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 194.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 194.
+
+[5] [6]
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 300.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 300.
+
+
+Overfull \hbox (27.49786pt too wide) in paragraph at lines 303--310
+/cmr12/Using $/eufm10@12.0pt/A/cmmi12/melia$ /cmr12/in $/cmmi12/R$ /cmr12/you w
+ill first have to load the li-brary into R us-ing the /cmtt12/library(Amelia)
+ []
+
+[7]
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 364.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 364.
+
+[8] [9] [10] [11] [12] [13] <comp.pdf, id=387, 578.16pt x 329.23pt>
+File: comp.pdf Graphic file (type pdf)
+
+<use comp.pdf>
+Overfull \hbox (35.09709pt too wide) in paragraph at lines 747--756
+ [][] 
+ []
+
+[14] [15 <./comp.pdf>] <overimp.pdf, id=413, 417.56pt x 417.56pt>
+File: overimp.pdf Graphic file (type pdf)
+
+<use overimp.pdf> [16] [17 <./overimp.pdf>]
+<overdis1d.pdf, id=436, 481.8pt x 451.6875pt>
+File: overdis1d.pdf Graphic file (type pdf)
+ <use overdis1d.pdf>
+<disperse-bad.pdf, id=437, 490.83376pt x 483.8075pt>
+File: disperse-bad.pdf Graphic file (type pdf)
+ <use disperse-bad.pdf>
+[18] <overdis2d.pdf, id=447, 417.56pt x 417.56pt>
+File: overdis2d.pdf Graphic file (type pdf)
+ <use overdis2d.pdf> [19 <./overdis1d.pdf>] [20 <./disperse-bad.pdf>] [21 <./ov
+erdis2d.pdf>]
+Overfull \hbox (25.53584pt too wide) in alignment at lines 1009--1014
+ [] [] 
+ []
+
+
+Overfull \hbox (25.53584pt too wide) in alignment at lines 1014--1065
+ [] [] 
+ []
+
+
+Overfull \hbox (25.53584pt too wide) in alignment at lines 1065--1124
+ [] [] 
+ []
+
+
+Overfull \hbox (25.53584pt too wide) in alignment at lines 1124--1147
+ [] [] 
+ []
+
+[22] [23]
+LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <14.4> not available
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 1151.
+
+
+Overfull \hbox (41.8687pt too wide) in paragraph at lines 1162--1162
+[]       /cmtt12/ts=NULL,cs=NULL,casepri=NULL,priors=NULL,empri=NULL,tolerance=
+0.0001,[] 
+ []
+
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 1166
+.
+(/usr/share/texmf/tex/latex/base/omscmr.fd
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 1166.
+
+ [24] [25] [26]
+<step1.png, id=521, 510.90875pt x 133.49875pt>
+File: step1.png Graphic file (type png)
+ <use step1.png> [27]
+<step2.png, id=527, 510.90875pt x 191.71625pt>
+File: step2.png Graphic file (type png)
+ <use step2.png> [28 <./step1.png> <./step2.png>] <varopts.png, id=537, 459.717
+5pt x 406.51875pt>
+File: varopts.png Graphic file (type png)
+
+<use varopts.png> [29 <./varopts.png>]
+<tscs.png, id=553, 416.55624pt x 381.425pt>
+File: tscs.png Graphic file (type png)
+ <use tscs.png> [30 <./tscs.png>]
+<priors.png, id=565, 463.7325pt x 243.91125pt>
+File: priors.png Graphic file (type png)
+ <use priors.png>
+<case.png, id=566, 393.47pt x 366.36874pt>
+File: case.png Graphic file (type png)
+ <use case.png> [31 <./priors.png>]
+<obsprior.png, id=582, 560.0925pt x 196.735pt>
+File: obsprior.png Graphic file (type png)
+ <use obsprior.png> [32 <./case.png> <./obsprior.png>] <distpri.png, id=594, 24
+4.915pt x 169.63374pt>
+File: distpri.png Graphic file (type png)
+
+<use distpri.png> <rangepri.png, id=595, 207.77625pt x 198.7425pt>
+File: rangepri.png Graphic file (type png)
+
+<use rangepri.png>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[33 <./distpri.png>] <step3.png, id=610, 510.90875pt x 159.59625pt>
+File: step3.png Graphic file (type png)
+
+<use step3.png>
+Overfull \hbox (18.15732pt too wide) in paragraph at lines 1618--1623
+/cmr12/you set this to ``my-data'', your out-put files will be /cmtt12/mydata1.
+csv, mydata2.csv...
+ []
+
+[34 <./rangepri.png> <./step3.png>]
+Overfull \hbox (1.43512pt too wide) in paragraph at lines 1632--1635
+[]/cmbx12/Diagnostics /cmr12/- Post-imputation di-ag-nos-tics. The only cur-ren
+tly avail-able graph
+ []
+
+<diag.png, id=623, 507.8975pt x 311.1625pt>
+File: diag.png Graphic file (type png)
+ <use diag.png> [35 <./diag.png>]
+(./amelia.bbl
+Underfull \hbox (badness 1412) in paragraph at lines 22--27
+/cmr12/a-lyz-ing In-com-plete Po-lit-i-cal Sci-ence Data: An Al-ter-na-tive Al-
+go-rithm for
+ []
+
+
+Underfull \hbox (badness 2941) in paragraph at lines 30--35
+[]/cmr12/King, Gary, Michael Tomz and Ja-son Wit-ten-berg. 2000.  ``Mak-ing the
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 30--35
+/cmr12/Most of Sta-tis-ti-cal Anal-y-ses: Im-prov-ing In-ter-pre-ta-tion and Pr
+e-sen-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 30--35
+/cmr12/ta-tion.'' /cmti12/Amer-i-can Jour-nal of Po-lit-i-cal Sci-ence /cmr12/4
+4(2, April):341--355.
+ []
+
+) [36] (./amelia.aux) ) 
+Here is how much of TeX's memory you used:
+ 4462 strings out of 95437
+ 55857 string characters out of 1188002
+ 119569 words of memory out of 1000001
+ 7207 multiletter control sequences out of 10000+50000
+ 19577 words of font info for 77 fonts, out of 500000 for 1000
+ 14 hyphenation exceptions out of 1000
+ 34i,8n,39p,802b,320s stack positions out of 1500i,500n,5000p,200000b,5000s
+ 643 PDF objects out of 300000
+ 165 named destinations out of 131072
+ 425 words of extra memory for PDF output out of 65536
+{/usr/share/texmf/dvips/tetex/74afc74c.enc}</usr/share/t
+exmf/fonts/type1/bluesky/cm/cmbxti10.pfb>{/usr/share/texmf/dvips/tetex/09fbbfac
+.enc}</usr/share/texmf/fonts/type1/bluesky/cm/cmtt10.pfb>{/usr/share/texmf/dvip
+s/tetex/aae443f0.enc}</usr/share/texmf/fonts/type1/bluesky/cm/cmmi10.pfb>{/usr/
+share/texmf/dvips/tetex/f7b6d320.enc}</usr/share/texmf/fonts/type1/bluesky/cm/c
+mr10.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmr7.pfb>{/usr/share/texmf/dv
+ips/tetex/bbad153f.enc}</usr/share/texmf/fonts/type1/bluesky/cm/cmsy10.pfb></us
+r/share/texmf/fonts/type1/bluesky/cm/cmr8.pfb></usr/share/texmf/fonts/type1/blu
+esky/cm/cmex10.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmmi8.pfb></usr/sha
+re/texmf/fonts/type1/bluesky/cm/cmtt12.pfb></usr/share/texmf/fonts/type1/bluesk
+y/cm/cmti12.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmbx12.pfb></usr/share
+/texmf/fonts/type1/bluesky/cm/cmr12.pfb></usr/share/texmf/fonts/type1/bluesky/c
+m/cmr17.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmmi12.pfb></usr/share/tex
+mf/fonts/type1/bluesky/euler/eufm10.pfb>
+Output written on amelia.pdf (37 pages, 482765 bytes).

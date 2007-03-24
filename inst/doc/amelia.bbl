@@ -1,0 +1,41 @@
+\begin{thebibliography}{xx}
+
+\harvarditem[Abayomi, Gelman \harvardand\ Levy]{Abayomi, Gelman \harvardand\
+  Levy}{2005}{AbaGelLev05}
+Abayomi, Kobi, Andrew Gelman \harvardand\ Marc Levy. 2005.
+\newblock ``Diagnostics for Multivariate Imputations.'' {\em Working Paper} .
+
+\harvarditem{Honaker \harvardand\ King}{2006}{HonKin06}
+Honaker, James \harvardand\ Gary King. 2006.
+\newblock ``What to do About Missing Values in Time Series Cross-Section
+  Data.''.
+\newblock http://gking.harvard.edu/files/abs/pr-abs.shtml.
+
+\harvarditem{King}{1995}{King95}
+King, Gary. 1995.
+\newblock ``Replication, Replication.'' {\em PS: Political Science and
+  Politics} 28(3, September):443--499.
+\newblock http://gking.harvard.edu/files/abs/replication-abs.shtml.
+
+\harvarditem[King et~al.]{King, Honaker, Joseph \harvardand\
+  Scheve}{2001}{KinHonJos01}
+King, Gary, James Honaker, Anne Joseph \harvardand\ Kenneth Scheve. 2001.
+\newblock ``Analyzing Incomplete Political Science Data: An Alternative
+  Algorithm for Multiple Imputation.'' {\em American Political Science Review}
+  95(1, March):49--69.
+\newblock http://gking.harvard.edu/files/abs/evil-abs.shtml.
+
+\harvarditem[King, Tomz \harvardand\ Wittenberg]{King, Tomz \harvardand\
+  Wittenberg}{2000}{KinTomWit00}
+King, Gary, Michael Tomz \harvardand\ Jason Wittenberg. 2000.
+\newblock ``Making the Most of Statistical Analyses: Improving Interpretation
+  and Presentation.'' {\em American Journal of Political Science} 44(2,
+  April):341--355.
+\newblock http://gking.harvard.edu/files/abs/making-abs.shtml.
+
+\harvarditem{Schafer}{1997}{Schafer97}
+Schafer, Joseph~L. 1997.
+\newblock {\em Analysis of incomplete multivariate data}.
+\newblock London:  Chapman \& Hall.
+
+\end{thebibliography}

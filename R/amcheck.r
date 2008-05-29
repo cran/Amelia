@@ -1,4 +1,4 @@
-1## amcheck.r
+## amcheck.r
 ## Function for checking for errors in coding
 ## of the data or input vectors
 ##
@@ -20,7 +20,8 @@ amcheck <- function(data,m=5,p2s=1,frontend=FALSE,idvars=NULL,logs=NULL,
                         leads=NULL,intercs=FALSE,archive=TRUE,sqrts=NULL,
                         lgstc=NULL,noms=NULL,incheck=T,ords=NULL,collect=FALSE,
                         outname="outdata",write.out=TRUE,arglist=NULL,
-                        keep.data=TRUE, priors=NULL) {
+                        keep.data=TRUE, priors=NULL,bounds=NULL,
+                        max.resample=1000) {
 
   #Checks for errors in list variables
   listcheck<-function(vars,optname) {
@@ -317,14 +318,26 @@ amcheck <- function(data,m=5,p2s=1,frontend=FALSE,idvars=NULL,logs=NULL,
       return(list(code=error.code,mess=error.mess))
     }
   }
+
+  
+  #warning message
+  #logs with negative values
+  if (!identical(logs,NULL)) {
+    if (any(na.omit(data[,logs]) < 0)) { 
+      warning(paste("The log transformation is being used on \n",
+                    "variables with negative values. The values \n",
+                    "will be shifted up by 1 plus the minimum value \n",
+                    "of that variable."))
+    }
+  }
   
   #Error code: 11
   #0-1 Bounds on logistic transformations
   if (!identical(lgstc,NULL)) {
-    if (any(na.omit(data[,lgstc]) <= 0,na.omit(data[,lgstc]>=1))) {
+    if (any(na.omit(data[,lgstc]) < 0,na.omit(data[,lgstc]>1))) {
       error.code<-11
-      error.mess<-paste("The logistic transformation cannot be used on \n",
-                        "variables with values out of the 0-1 range.")
+      error.mess<-paste("The logistic transformation can only be used on \n",
+                        "values between 0 and 1.")
       return(list(code=error.code,mess=error.mess))
     }
     
@@ -647,14 +660,19 @@ nominal\n",
   if (!is.null(ords)) {
     for (i in ords) {
       #Error code: 44
-      #Ordinal variable with non-integers
-      if (any(unique(na.omit(data[,i])) %% 1 != 0 )) {
-        error.code<-44
-        error.mess<-paste("You have designated a variable as ordinal when it has non-integer values.")
-        return(list(code=error.code,mess=error.mess))
+      # Ordinal variable with non-integers (factors work by design, and they're
+      # harder to check
+      if (!is.factor(data[,i])) {
+        if (any(unique(na.omit(data[,i])) %% 1 != 0 )) {
+          error.code<-44
+          error.mess<-paste("You have designated a variable as ordinal when it has non-integer values.")
+          return(list(code=error.code,mess=error.mess))
+        }
       }
     }    
   }
+
+ 
   
   #checks for outname
   if (write.out==T) {
@@ -709,6 +727,38 @@ check","that the directory exists and that you have permission to write.",sep="\
   }
 
 
+  # checks for bounds
+  if (!identical(bounds,NULL)) {
+    b.size <- is.matrix(bounds) && ncol(bounds)==3 && nrow(bounds) > 0
+    b.cols <- sum(bounds[,1] %in% c(1:AMp)) == nrow(bounds)
+    maxint <- max.resample > 0 && (max.resample %% 1)==0
+    
 
+    # Error 50:
+    # wrong sized bounds matrix
+    if (!b.size) {
+      error.code<-50
+      error.mess<-paste("The bounds argument is a three-column matrix.")
+      return(list(code=error.code,mess=error.mess))
+    }
+
+    # Error 51:
+    # nonexistant columns in bounds.
+    if (!b.cols) {
+      error.code<-51
+      error.mess<-paste("One of the bounds is on a non-existant column.")
+      return(list(code=error.code,mess=error.mess))
+    }
+
+    # Error 52:
+    # max.resample needs to be positive integer.
+    if (!maxint) {
+      error.code<-52
+      error.mess<-paste("The max.resample argument needs to be a positive integer.")
+      return(list(code=error.code,mess=error.mess))
+    }      
+  }
+
+  
   return(list(m=m,outname=outname,priors=priors))
 }

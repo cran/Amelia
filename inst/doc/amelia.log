@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159-1.10b (Web2C 7.4.5) (format=pdflatex 2006.1.9)  24 MAR 2007 14:20
+This is pdfTeX, Version 3.14159-1.10b (Web2C 7.4.5) (format=pdflatex 2007.11.9)  29 MAY 2008 15:26
 **amelia
 (./amelia.tex{/usr/share/texmf/pdftex/config/pdftex.cfg}
 LaTeX2e <2001/06/01>
@@ -126,11 +126,11 @@ Package: longtable 2000/10/22 v4.10 Multi-page Table package (DPC)
 \c@LT@chunks=\count106
 \LT@p@ftn=\toks18
 )
-(/nfs/fs1/home/K/king/texinputs/natbib.sty
-Package: natbib 1999/02/25 6.9 (PWD)
+(/usr/share/texmf/tex/latex/natbib/natbib.sty
+Package: natbib 2000/07/24 7.0a (PWD)
 \bibhang=\skip49
 \bibsep=\skip50
-LaTeX Info: Redefining \cite on input line 486.
+LaTeX Info: Redefining \cite on input line 508.
 \c@NAT@ctr=\count107
 )
 (/usr/share/texmf/tex/latex/misc/vmargin.sty
@@ -310,6 +310,10 @@ l.36 ...{13}AmeliaView Menu Guide}{28}{section.13}
 
  [2]
 
+Package natbib Warning: Citation `HonKin06' on page 3 undefined on input line 9
+3.
+
+
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `math shift' on input line 96.
 
@@ -359,25 +363,29 @@ Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `math shift' on input line 364.
 
-[8] [9] [10] [11] [12] [13] <comp.pdf, id=387, 578.16pt x 329.23pt>
-File: comp.pdf Graphic file (type pdf)
+[8] [9] [10] [11] [12]
 
-<use comp.pdf>
+Package natbib Warning: Citation `HonKin06' on page 13 undefined on input line 
+679.
+
+[13] <comp.pdf, id=382, 578.16pt x 329.23pt>
+File: comp.pdf Graphic file (type pdf)
+ <use comp.pdf>
 Overfull \hbox (35.09709pt too wide) in paragraph at lines 747--756
  [][] 
  []
 
-[14] [15 <./comp.pdf>] <overimp.pdf, id=413, 417.56pt x 417.56pt>
+[14] [15 <./comp.pdf>] <overimp.pdf, id=408, 417.56pt x 417.56pt>
 File: overimp.pdf Graphic file (type pdf)
 
 <use overimp.pdf> [16] [17 <./overimp.pdf>]
-<overdis1d.pdf, id=436, 481.8pt x 451.6875pt>
+<overdis1d.pdf, id=431, 481.8pt x 451.6875pt>
 File: overdis1d.pdf Graphic file (type pdf)
  <use overdis1d.pdf>
-<disperse-bad.pdf, id=437, 490.83376pt x 483.8075pt>
+<disperse-bad.pdf, id=432, 490.83376pt x 483.8075pt>
 File: disperse-bad.pdf Graphic file (type pdf)
  <use disperse-bad.pdf>
-[18] <overdis2d.pdf, id=447, 417.56pt x 417.56pt>
+[18] <overdis2d.pdf, id=442, 417.56pt x 417.56pt>
 File: overdis2d.pdf Graphic file (type pdf)
  <use overdis2d.pdf> [19 <./overdis1d.pdf>] [20 <./disperse-bad.pdf>] [21 <./ov
 erdis2d.pdf>]
@@ -419,39 +427,39 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 1166.
 
  [24] [25] [26]
-<step1.png, id=521, 510.90875pt x 133.49875pt>
+<step1.png, id=516, 510.90875pt x 133.49875pt>
 File: step1.png Graphic file (type png)
  <use step1.png> [27]
-<step2.png, id=527, 510.90875pt x 191.71625pt>
+<step2.png, id=522, 510.90875pt x 191.71625pt>
 File: step2.png Graphic file (type png)
- <use step2.png> [28 <./step1.png> <./step2.png>] <varopts.png, id=537, 459.717
+ <use step2.png> [28 <./step1.png> <./step2.png>] <varopts.png, id=532, 459.717
 5pt x 406.51875pt>
 File: varopts.png Graphic file (type png)
 
 <use varopts.png> [29 <./varopts.png>]
-<tscs.png, id=553, 416.55624pt x 381.425pt>
+<tscs.png, id=548, 416.55624pt x 381.425pt>
 File: tscs.png Graphic file (type png)
  <use tscs.png> [30 <./tscs.png>]
-<priors.png, id=565, 463.7325pt x 243.91125pt>
+<priors.png, id=560, 463.7325pt x 243.91125pt>
 File: priors.png Graphic file (type png)
  <use priors.png>
-<case.png, id=566, 393.47pt x 366.36874pt>
+<case.png, id=561, 393.47pt x 366.36874pt>
 File: case.png Graphic file (type png)
  <use case.png> [31 <./priors.png>]
-<obsprior.png, id=582, 560.0925pt x 196.735pt>
+<obsprior.png, id=577, 560.0925pt x 196.735pt>
 File: obsprior.png Graphic file (type png)
- <use obsprior.png> [32 <./case.png> <./obsprior.png>] <distpri.png, id=594, 24
+ <use obsprior.png> [32 <./case.png> <./obsprior.png>] <distpri.png, id=589, 24
 4.915pt x 169.63374pt>
 File: distpri.png Graphic file (type png)
 
-<use distpri.png> <rangepri.png, id=595, 207.77625pt x 198.7425pt>
+<use distpri.png> <rangepri.png, id=590, 207.77625pt x 198.7425pt>
 File: rangepri.png Graphic file (type png)
 
 <use rangepri.png>
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[33 <./distpri.png>] <step3.png, id=610, 510.90875pt x 159.59625pt>
+[33 <./distpri.png>] <step3.png, id=605, 510.90875pt x 159.59625pt>
 File: step3.png Graphic file (type png)
 
 <use step3.png>
@@ -466,57 +474,61 @@ Overfull \hbox (1.43512pt too wide) in paragraph at lines 1632--1635
 tly avail-able graph
  []
 
-<diag.png, id=623, 507.8975pt x 311.1625pt>
+<diag.png, id=618, 507.8975pt x 311.1625pt>
 File: diag.png Graphic file (type png)
  <use diag.png> [35 <./diag.png>]
 (./amelia.bbl
-Underfull \hbox (badness 1412) in paragraph at lines 22--27
+Underfull \hbox (badness 1412) in paragraph at lines 16--21
 /cmr12/a-lyz-ing In-com-plete Po-lit-i-cal Sci-ence Data: An Al-ter-na-tive Al-
 go-rithm for
  []
 
 
-Underfull \hbox (badness 2941) in paragraph at lines 30--35
+Underfull \hbox (badness 2941) in paragraph at lines 24--29
 []/cmr12/King, Gary, Michael Tomz and Ja-son Wit-ten-berg. 2000.  ``Mak-ing the
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 30--35
+Underfull \hbox (badness 10000) in paragraph at lines 24--29
 /cmr12/Most of Sta-tis-ti-cal Anal-y-ses: Im-prov-ing In-ter-pre-ta-tion and Pr
 e-sen-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 30--35
+Underfull \hbox (badness 10000) in paragraph at lines 24--29
 /cmr12/ta-tion.'' /cmti12/Amer-i-can Jour-nal of Po-lit-i-cal Sci-ence /cmr12/4
 4(2, April):341--355.
  []
 
-) [36] (./amelia.aux) ) 
+)
+
+Package natbib Warning: There were undefined citations.
+
+[36] (./amelia.aux) ) 
 Here is how much of TeX's memory you used:
- 4462 strings out of 95437
- 55857 string characters out of 1188002
- 119569 words of memory out of 1000001
- 7207 multiletter control sequences out of 10000+50000
+ 4478 strings out of 95437
+ 55945 string characters out of 1190233
+ 119829 words of memory out of 1000001
+ 7226 multiletter control sequences out of 10000+50000
  19577 words of font info for 77 fonts, out of 500000 for 1000
  14 hyphenation exceptions out of 1000
  34i,8n,39p,802b,320s stack positions out of 1500i,500n,5000p,200000b,5000s
- 643 PDF objects out of 300000
- 165 named destinations out of 131072
+ 638 PDF objects out of 300000
+ 164 named destinations out of 131072
  425 words of extra memory for PDF output out of 65536
-{/usr/share/texmf/dvips/tetex/74afc74c.enc}</usr/share/t
-exmf/fonts/type1/bluesky/cm/cmbxti10.pfb>{/usr/share/texmf/dvips/tetex/09fbbfac
-.enc}</usr/share/texmf/fonts/type1/bluesky/cm/cmtt10.pfb>{/usr/share/texmf/dvip
-s/tetex/aae443f0.enc}</usr/share/texmf/fonts/type1/bluesky/cm/cmmi10.pfb>{/usr/
-share/texmf/dvips/tetex/f7b6d320.enc}</usr/share/texmf/fonts/type1/bluesky/cm/c
-mr10.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmr7.pfb>{/usr/share/texmf/dv
-ips/tetex/bbad153f.enc}</usr/share/texmf/fonts/type1/bluesky/cm/cmsy10.pfb></us
-r/share/texmf/fonts/type1/bluesky/cm/cmr8.pfb></usr/share/texmf/fonts/type1/blu
-esky/cm/cmex10.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmmi8.pfb></usr/sha
-re/texmf/fonts/type1/bluesky/cm/cmtt12.pfb></usr/share/texmf/fonts/type1/bluesk
-y/cm/cmti12.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmbx12.pfb></usr/share
-/texmf/fonts/type1/bluesky/cm/cmr12.pfb></usr/share/texmf/fonts/type1/bluesky/c
-m/cmr17.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmmi12.pfb></usr/share/tex
-mf/fonts/type1/bluesky/euler/eufm10.pfb>
-Output written on amelia.pdf (37 pages, 482765 bytes).
+{/usr/share/texmf/dvips/tetex/74afc74c.enc}</usr/share/tex
+mf/fonts/type1/bluesky/cm/cmbxti10.pfb>{/usr/share/texmf/dvips/tetex/09fbbfac.e
+nc}</usr/share/texmf/fonts/type1/bluesky/cm/cmtt10.pfb>{/usr/share/texmf/dvips/
+tetex/aae443f0.enc}</usr/share/texmf/fonts/type1/bluesky/cm/cmmi10.pfb>{/usr/sh
+are/texmf/dvips/tetex/f7b6d320.enc}</usr/share/texmf/fonts/type1/bluesky/cm/cmr
+10.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmr7.pfb>{/usr/share/texmf/dvip
+s/tetex/bbad153f.enc}</usr/share/texmf/fonts/type1/bluesky/cm/cmsy10.pfb></usr/
+share/texmf/fonts/type1/bluesky/cm/cmr8.pfb></usr/share/texmf/fonts/type1/blues
+ky/cm/cmex10.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmmi8.pfb></usr/share
+/texmf/fonts/type1/bluesky/cm/cmtt12.pfb></usr/share/texmf/fonts/type1/bluesky/
+cm/cmti12.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmbx12.pfb></usr/share/t
+exmf/fonts/type1/bluesky/cm/cmr12.pfb></usr/share/texmf/fonts/type1/bluesky/cm/
+cmr17.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmmi12.pfb></usr/share/texmf
+/fonts/type1/bluesky/euler/eufm10.pfb>
+Output written on amelia.pdf (37 pages, 481988 bytes).

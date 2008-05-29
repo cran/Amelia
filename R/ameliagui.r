@@ -338,7 +338,6 @@ run.amelia <- function() {
     if (transmat[i] == 5)
       lgstc <- c(lgstc,i)      
 
-  
 
 
   for (i in 1:ncol(amelia.data)) {
@@ -406,8 +405,6 @@ addTclPath(libdir)
 tclRequire("combobox")
 .Tcl("catch {namespace import ::combobox::*}")
 tclRequire("BWidget")
-if (.Platform$OS.type == "windows") 
-  tclRequire("Tktable")
 
 outname <<- tclVar("outdata")
 outnum <<- tclVar("5")
@@ -1673,7 +1670,7 @@ gui.diag.setup <- function() {
 }
 #tkwm.iconbitmap(gui,"~/amelia/setup/files/amelia.ico")
 tkwm.deiconify(gui)
-tkwait.window(gui)
+#tkwait.window(gui)
 
 }
 

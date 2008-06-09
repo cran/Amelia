@@ -1,12 +1,12 @@
 Package: Amelia
-Version: 1.1-29
-Date: 2008-05-29
+Version: 1.1-30
+Date: 2008-06-09
 Title: Amelia II: A Program for Missing Data
 Author: James Honaker <tercer@ucla.edu>,
         Gary King <king@harvard.edu>,
         Matthew Blackwell <blackwel@fas.harvard.edu>
 Maintainer: Matthew Blackwell <blackwel@fas.harvard.edu>
-Depends: R (>= 2.0.0), foreign, tcltk
+Depends: R (>= 2.0.0), foreign
 Description: Amelia II "multiply imputes" missing data in a single cross-section
   (such as a survey), from a time series (like variables collected for
   each year in a country), or from a time-series-cross-sectional data
@@ -26,5 +26,5 @@ Description: Amelia II "multiply imputes" missing data in a single cross-section
   does not require users to know R.
 License: GPL version 2 or newer
 URL: http://gking.harvard.edu/amelia
-Suggests: 
-Packaged: Thu May 29 15:26:52 2008; king
+Suggests: tcltk
+Packaged: Mon Jun  9 10:58:02 2008; king

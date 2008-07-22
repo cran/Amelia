@@ -1,6 +1,6 @@
 Package: Amelia
-Version: 1.1-32
-Date: 2008-07-17
+Version: 1.1-33
+Date: 2008-07-22
 Title: Amelia II: A Program for Missing Data
 Author: James Honaker <tercer@ucla.edu>,
         Gary King <king@harvard.edu>,
@@ -27,4 +27,4 @@ Description: Amelia II "multiply imputes" missing data in a single cross-section
 License: GPL version 2 or newer
 URL: http://gking.harvard.edu/amelia
 Suggests: tcltk
-Packaged: Thu Jul 17 12:49:07 2008; king
+Packaged: Tue Jul 22 14:30:29 2008; king

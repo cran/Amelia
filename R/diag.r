@@ -16,11 +16,24 @@
 ##  03/04/07 jh - disperse: changed 1d plot settings, number of colors, minor edits to "patt" construction.
 ##  10/04/07 jh - created sigalert function to view disperse principal components.
 ##  22/07/08 mb - good coding update: T->TRUE/F->FALSE
+##  10/02/09 mb - compare: added lwd, col, main, lab, etc for user
+##                control, added scale so that users can control scaling,
+##                uses amelia class
+##                overimpute: uses amelia class, added lwd, col, main, lab, etc for user
+##                disperse: now uses amelia class
 
-compare.density <- function(data=NULL,output=NULL,var=NULL,col=1:2,lwd=1,main="",frontend=FALSE,...) {
-  
-  if (all(!is.data.frame(data),!is.matrix(data)))
-    stop("The 'data' is not a data frame or matrix.")
+
+compare.density <- function(output,var,col=c("red","black"),scaled=FALSE,lwd=1,main,xlab,ylab,legend=TRUE,frontend=FALSE,...) {
+
+  if (!("amelia" %in% class(output)))
+    stop("The 'output' is not Amelia output.")
+
+  ## The original data is the imputed data with the
+  ## imputations marked to NA. These two lines do that
+  data <- output$imputations[[1]]
+  is.na(data) <- output$missMatrix
+
+  ## Checks on if the variable makes sense to plot.
   if (class(var)=="character")
     if (!(var %in% names(data)))
       stop("The variable name (var) doesn't correspond to a column in the data.")
@@ -28,75 +41,118 @@ compare.density <- function(data=NULL,output=NULL,var=NULL,col=1:2,lwd=1,main=""
       var<-match(var,names(data))
   if (any(var>ncol(data),var<0,var%%1!=0))
     stop("The 'var' option points to a non-existant column.")
-  if (!is.numeric(data[,var]))
-    stop("The variable selected is not a numeric variable.")
-  if (any(!is.list(output),is.null(output$amelia.arg),is.null(output$m1)))
-    stop("The 'output' is not an Amelia list.")
+  if (var %in% output$arguments$idvar)
+    stop("the variable selected was marked as an idvar")
   
-  mcount<-output$amelia.arg$m
-  varimp<-output[[1]][,var]
-  if (identical(varimp,NA)) {
-    varimp<-0
-    mcount<-mcount-1
+  ## We need to clean the data to make sure that
+  ## we're not going to run into NAs
+  mcount <- sum(!is.na(output$imputations))
+  imputed <- (1:output$m)[!is.na(output$imputations)]
+
+  ## create an empty vector to sum across
+  varimp <- matrix(NA, nrow(data), mcount)
+  
+  for (i in 1:mcount) {
+    varimp[,i] <- output$imputations[[imputed[i]]][,var]
+  }
+  if (var %in% c(output$arguments$noms, output$arguments$ords)) {
+    leg.text <- "Modal Imputations"
+    varimp <- apply(varimp, 1, function(x) as.numeric(names(which.max(table(x)))))
   } else {
-    if (any(dim(output[[1]])!=dim(data)))
-      stop("The 'output' doesn't match the data.")
-    else if (!is.numeric(output[[1]][,var]))
-      stop("The variable selected is not a numeric variable")
+    leg.tex <- "Mean Imputations"
+    varimp <- rowMeans(varimp)
   }
-  for (i in 2:output$amelia.arg$m) {
-    if (identical(output[[i]],NA)) {
-      mcount<-mcount-1
-    } else {
-      varimp<-varimp+output[[i]][,var]
-      if (any(dim(output[[i]])!=dim(data)))
-        stop("The 'output' doesn't match the data.")
-      else if (!is.numeric(output[[i]][,var]))
-        stop("The variable selected is not a numeric variable.")
-    }
-  }
-  varimp<-varimp/mcount
   
   if (frontend)
     x11()
       
   
   vars <- data[,var]
-  ratio<-length(varimp[is.na(vars)])/length(varimp[!is.na(vars)])
+  if (scaled) 
+    ratio <- sum(is.na(vars))/sum(!is.na(vars))
+  else
+    ratio <- 1
   varnames<-dimnames(data)[[2]]            # This will work for both data.frames AND matricies.
-  main<-varnames[var]                      # This will work for both data.frames AND matricies.
-  if (is.null(main))
-    main<-""
+  vname<-varnames[var]                     # This will work for both data.frames AND matricies.
+
+  
   if (sum(is.na(vars)) > 0) {
-    xmiss <- density(varimp[is.na(vars)],na.rm=TRUE)
-    xobs<- density(varimp[!is.na(vars)],na.rm=TRUE)
-    compplot <- matplot(x=cbind(xmiss$x,xobs$x),y=cbind(ratio*xmiss$y,xobs$y), xlab=main, ylab="relative density",type="l",lwd=lwd, lty=1,main=paste("Observed and Imputed values of",main),col=col,...)
     
-    legend("topright",legend=c("Mean Imputations","Observed Values"),
-                  col=col,lty=c(1,1),bg='gray90',lwd=lwd)
+    if (missing(main)) {
+      main <- paste("Observed and Imputed values of",vname)
+    }
+    if (missing(xlab)) {
+      xlab <- paste(vname,"  --  Percent Missing:",round(mean(is.na(vars)),digits=3))
+
+    }
+    if (missing(ylab)) {
+      ylab <- "Relative Density"
+    }
+    
+    xmiss <- density(varimp[is.na(vars)],na.rm=TRUE)
+    xobs  <- density(varimp[!is.na(vars)],na.rm=TRUE)
+    compplot <- matplot(x=cbind(xmiss$x,xobs$x),y=cbind(ratio*xmiss$y,xobs$y), xlab=xlab, ylab=ylab,type="l",lwd=lwd, lty=1,main=main,col=col,...)
+    if (legend) {
+      legend("topright",legend=c(leg.text,"Observed Values"),
+             col=col,lty=c(1,1),bg='gray90',lwd=lwd)
+    }
   } else {
+    if (missing(main)) {
+      main <- paste("Observed values of",vname)
+    }
+    if (missing(xlab)) {
+      xlab <- vname
+    }
+    if (missing(ylab)) {
+      ylab <- "Relative Density"
+    }
+    
     compplot <- plot(density(varimp,na.rm=TRUE),
       xlim=c(min(varimp,na.rm=TRUE),max(varimp,na.rm=TRUE)), col = "blue",
       main = main,...)
     col.none=c("gray","blue")
-    legend("topright",legend=c("Mean Imputations (None)","Observed Values"),
-                  col=col.none,lty=c(1,1),bg='gray90')
+
+    if (legend) {
+      legend("topright",legend=c("Mean Imputations (None)","Observed Values"),
+             col=col.none,lty=c(1,1),bg='gray90')
+    }
   }
   
   invisible()
 }
 
 
+##
+## overimpute - imputes observed values to check the imputation model
+##
+##  INPUTS:output         - output from amelia run (class "amelia")
+##         var            - column number or variable name to overimpute
+##         legend         - should we add a lengend to the plot? (TRUE/FALSE)
+##         xlab,ylab,main - graphical parameters
+##         frontend       - logical for printing to tcl/tk window
+##
+## mb 02/02/09 - changed calls to "amelia" class of output
+##             - added ability to pass xlab,main,legend, etc
+##
 
-overimpute <- function(data,output,var,frontend=FALSE) {
 
+overimpute <- function(output,var,legend=TRUE,xlab,ylab,main,frontend=FALSE,...) {
+
+  if (!("amelia" %in% class(output)))
+    stop("The 'output' is not Amelia output.")
+
+  ## The original data is the imputed data with the
+  ## imputations marked to NA. These two lines do that
+  data <- output$imputations[[1]]
+  is.na(data) <- output$missMatrix
+  
   # Allow character names as arguments for "var" with data.frames
 
   if(is.character(var)){
     if(!is.data.frame(data)){
       stop("var must be identified by column number as dataset is not a data frame.")
     } else {
-      varpos<-match(var,names(data))
+      varpos<-match(var,colnames(data))
       if(is.na(varpos)){
         stop("The name provided for var argument does not exist in the dataset provided.")
       } else {
@@ -104,14 +160,11 @@ overimpute <- function(data,output,var,frontend=FALSE) {
       }
     }
   }
- 
-  prepped<-amelia.prep(data=data,m=m,idvars=idvars,priors=priors,empri=empri,
-                       ts=ts,cs=cs,tolerance=tolerance,casepri=casepri,
-                       polytime=polytime, lags=lags,leads=leads,logs=logs,
-                       sqrts=sqrts,lgstc=lgstc, p2s=FALSE,frontend=frontend,
-                       archive=FALSE,intercs=intercs, noms=noms,
-                       startvals=startvals,ords=ords,incheck=FALSE, collect=FALSE,
-                       outname="outdata",write.out=FALSE,var=var,arglist=output)
+
+
+  ## The argument list for an amelia output is now
+  ## at "output$arguments"
+  prepped<-amelia.prep(x=data,arglist=output$arguments, incheck=FALSE)
 
   stacked.var<-match(var,prepped$subset.index[prepped$p.order])
   subset.var<-match(var,prepped$subset.index)
@@ -145,20 +198,34 @@ overimpute <- function(data,output,var,frontend=FALSE) {
                                                                  # These are always fully observed by construction, but auxiliary.
                                                                  # Leaves constructed lags and leads, and nominal variables in count, however.
     conf<-c()
-    for (k in 1:prepped$m) {
-      thetareal<-output[[paste("theta",k,sep="")]]
-      theta<-amsweep(thetareal,c(FALSE,o))
+    for (k in 1:output$m) {
+
+      ## The theta matrix is now stored in a array with
+      ## dimensions c(vars+1,vars+1,m), so this grabs
+      ## the kth theta matrix.
       
+      thetareal<-output$theta[,,k]
+      theta <- amsweep(thetareal, c(FALSE,o))
+#      test <-.C("sweepRows", g = as.double(thetareal), p =
+#         as.integer(nrow(thetareal)), m = as.integer(c(FALSE,o)), reverse
+#         = as.integer(FALSE))$g
+#      browser()
       Ci<-matrix(0,AMp,AMp)
       hold<-chol(theta[c(FALSE,miss),c(FALSE,miss)])
       Ci[miss,miss]<-hold      
       imputations<-AMr1[i, , drop=FALSE] * ((x %*% theta[2:(AMp+1),2:(AMp+1) , drop=FALSE])
           + (matrix(1,1,1) %*% theta[1,2:(AMp+1) , drop=FALSE]) )
-      for (j in 1:20) {             ## COULD REMOVE THIS LOOP
-        junk<-matrix(rnorm(AMp), 1, AMp) %*% Ci
-        xc<-x + imputations + junk
-        conf<-c(conf,xc[,stacked.var])      
-      }
+#      for (j in 1:20) {             ## COULD REMOVE THIS LOOP 
+                                     ## (mb: I removed it for speed)
+#        junk<-matrix(rnorm(AMp), 1, AMp) %*% Ci
+#        xc<-x + imputations + junk
+#        conf<-c(conf,xc[,stacked.var])      
+#      }
+      junk <- matrix(rnorm(20*AMp), 20, AMp)
+      xc <- matrix(x,20,AMp,byrow=TRUE) +
+            matrix(imputations, 20, AMp, byrow=TRUE) +
+            junk
+      conf <- c(conf, xc[,stacked.var])
     }
     
     scaled.conf <- (conf * prepped$scaled.sd[subset.var])  + prepped$scaled.mu[subset.var]
@@ -184,8 +251,8 @@ overimpute <- function(data,output,var,frontend=FALSE) {
     else if (pcntmiss >=.80)
       color<-c(color,spectrum[5])
     means<-c(means,mean(scaled.conf))
-    lowers<-c(lowers,sort(scaled.conf)[round(prepped$m*20*0.05)])
-    uppers<-c(uppers,sort(scaled.conf)[round(prepped$m*20*0.95)])
+    lowers<-c(lowers,sort(scaled.conf)[round(output$m*20*0.05)])
+    uppers<-c(uppers,sort(scaled.conf)[round(output$m*20*0.95)])
 
   }
 
@@ -196,17 +263,28 @@ overimpute <- function(data,output,var,frontend=FALSE) {
 
   addedroom<-(max(uppers)-min(lowers))*0.1
 
+  if (missing(xlab)) {
+    xlab <- "Observed Values"
+  }
+  if (missing(ylab)) {
+    ylab <- "Imputed Values"
+  }
+  if (missing(main)) {
+    main <- paste("Observed versus Imputed Values of",colnames(data)[var])
+  }
+
   if (frontend)
     x11()
   ci.order<-order(uppers-lowers,decreasing=TRUE)     # Allows smallest CI's to be printed last, and thus not buried in the plot.
-  overplot<-plot(xplot[ci.order],means[ci.order],xlab="Observed values",ylab="Imputed values",ylim=range(c(lowers-addedroom,uppers)),type='p',main="Observed versus Imputed Values")
+  overplot<-plot(xplot[ci.order],means[ci.order],xlab=xlab,ylab=ylab,ylim=range(c(lowers-addedroom,uppers)),type='p',main=main,...)
   segments(xplot[ci.order],lowers[ci.order],xplot[ci.order],uppers[ci.order],col=color[ci.order])
-
-  legend("bottomright",legend=c(" 0-.2",".2-.4",".4-.6",".6-.8",".8-1"),
-                  col=spectrum,lty=c(1,1),horiz=TRUE,bty="n")
+  if (legend) {
+    legend("bottomright",legend=c(" 0-.2",".2-.4",".4-.6",".6-.8",".8-1"),
+           col=spectrum,lty=c(1,1),horiz=TRUE,bty="n")
+  }
   
   abline(0,1)
-  return(overplot)
+  invisible(overplot)
 }
       
 gethull <- function(st,tol,rots) {
@@ -222,42 +300,34 @@ gethull <- function(st,tol,rots) {
 }  
 
     
-disperse <- function(data,m=5,p2s=TRUE,frontend=FALSE,idvars=NULL,logs=NULL,ts=NULL,cs=NULL,casepri=NULL,priors=NULL,empri=NULL,tolerance=0.00001,polytime=NULL,startvals=0,
-                  lags=NULL, leads=NULL, intercs=FALSE,archive=TRUE,sqrts=NULL,lgstc=NULL,noms=NULL,incheck=TRUE,
-                  ords=NULL,dims=1, output=NULL) {
+disperse <- function(output, m = 5, dims = 1, p2s = 0, frontend=FALSE,...) {
 
+  if (!("amelia" %in% class(output)))
+    stop("The 'output' is not Amelia output.")
+
+  ## The original data is the imputed data with the
+  ## imputations marked to NA. These two lines do that
+  data <- output$imputations[[1]]
+  is.na(data) <- output$missMatrix
 
   if (frontend) {
     require(tcltk)
-    tcl.window<<-tktoplevel()
-    scr <- tkscrollbar(tcl.window, repeatinterval=5,
-          command=function(...)tkyview(run.text,...))
-    run.text<<-tktext(tcl.window,font=c("Courier",10),
-          yscrollcommand=function(...)tkset(scr,...))
-    tkgrid(run.text,scr)
+    putAmelia("tcl.window",tktoplevel())
+    scr <- tkscrollbar(getAmelia("tcl.window"), repeatinterval=5,
+          command=function(...)tkyview(getAmelia("run.text"),...))
+    putAmelia("run.text",tktext(getAmelia("tcl.window"),font=c("Courier",10),
+          yscrollcommand=function(...)tkset(scr,...)))
+    tkgrid(getAmelia("run.text"),scr)
     tkgrid.configure(scr,sticky="ns")
-    tkwm.title(tcl.window,"Overdisperse Output")
+    tkwm.title(getAmelia("tcl.window"),"Overdisperse Output")
     tcl("update")
   }
-  
-  code<-1
 
   # prep the data and arguments
-  prepped<-amelia.prep(data=data,m=m,idvars=idvars,priors=priors,empri=empri,ts=ts,cs=cs,
-                        tolerance=tolerance,casepri=casepri,polytime=polytime,
-                        lags=lags,leads=leads,logs=logs,sqrts=sqrts,lgstc=lgstc,
-                        p2s=p2s,frontend=frontend,archive=archive,intercs=intercs,
-                        noms=noms,startvals=startvals,ords=ords,incheck=incheck,arglist=output)
+  prepped<-amelia.prep(x=data, arglist=output$arguments)
 
-
-
-
-  if (prepped$code!=1) {
-    cat("Amelia Error Code: ",prepped$code,"\n",prepped$message,"\n")
-    return(list(code=prepped$code,message=prepped$message))
-  }
   if (p2s) cat("-- Imputation", "1", "--")
-  if (frontend) tkinsert(run.text,"end",paste("-- Imputation","1","--\n"))
+  if (frontend) tkinsert(getAmelia("run.text"),"end",paste("-- Imputation","1","--\n"))
   flush.console()
 
   # run EM, but return it with the theta at each iteration
@@ -277,7 +347,7 @@ disperse <- function(data,m=5,p2s=TRUE,frontend=FALSE,idvars=NULL,logs=NULL,ts=N
   for (i in 2:m){
 
     if (p2s) cat("-- Imputation", i, "--\n")
-    if (frontend) tkinsert(run.text,"end",paste("-- Imputation",i,"--\n"))    
+    if (frontend) tkinsert(getAmelia("run.text"),"end",paste("-- Imputation",i,"--\n"))    
 
     # get a noisy sample of data from the that starting value (which is the
     # Amelia answer) and use that to estimate a new starting theta (mus/vcov)
@@ -355,7 +425,7 @@ disperse <- function(data,m=5,p2s=TRUE,frontend=FALSE,idvars=NULL,logs=NULL,ts=N
     #  arrows(x[patt],y[patt],x[patt+1],y[patt+1],length=.15,col=1,lwd=5)
     patt<-seq(1,length(x)-1)                                   
     segments(x[patt],y[patt],x[patt+1],y[patt+1],col=1,lwd=1)
-    dists<-gethull(st=impdata[,iters[1]],tol=tolerance,rots=rotations)
+    dists<-gethull(st=impdata[,iters[1]],tol=prepped$tolerance,rots=rotations)
     convexhull<-chull(t(dists))
     convexhull<-c(convexhull,convexhull[1])
     lines(t(dists)[convexhull,],col="orange",pch=19,lwd=2)
@@ -363,9 +433,9 @@ disperse <- function(data,m=5,p2s=TRUE,frontend=FALSE,idvars=NULL,logs=NULL,ts=N
     abline(v=0,lty=2)  
   }
   if (frontend)
-    tkdestroy(tcl.window)
+    tkdestroy(getAmelia("tcl.window"))
   
-  return(list(impdata=impdata,p.order=prepped$p.order,index=prepped$index,iters=iters,rotations=rotations,dims=dims))
+  invisible(list(impdata=impdata,p.order=prepped$p.order,index=prepped$index,iters=iters,rotations=rotations,dims=dims))
 
 }    
    
@@ -477,3 +547,89 @@ sigalert<-function(data,disperse.list,output,notorious=5){
 }
 
 
+tscsPlot <- function(output, var, cs, draws = 100, conf = .90,
+                      misscol = "red", obscol = "black", xlab, ylab, main,
+                      pch, ylim, xlim, ...) {
+
+  if (is.null(output$arguments$ts) || is.null(output$arguments$cs))
+    stop("both 'ts' and 'cs' need to be set in the amelia output")
+  if (!("amelia" %in% class(output)))
+    stop("the 'output' is not Amelia output")
+
+  ## The original data is the imputed data with the
+  ## imputations marked to NA. These two lines do that
+  data <- output$imputations[[1]]
+  is.na(data) <- output$missMatrix
+  
+  # Allow character names as arguments for "var" with data.frames
+
+  if(is.character(var)){
+    if(!is.data.frame(data)){
+      stop("'var' must be identified by column number as dataset is not a data frame")
+    } else {
+      varpos<-match(var,colnames(data))
+      if(is.na(varpos)){
+        stop("the name provided for 'var' argument does not exist in the dataset provided")
+      } else {
+      var<-varpos
+      }
+    }
+  }
+
+  units <- unique(data[,output$arguments$cs])
+  if (!(cs %in% units))
+    stop("the cross-section unit is not in the data")
+
+  unit.rows <- which(data[,output$arguments$cs]==cs)
+  time <- data[unit.rows, output$arguments$ts]
+  miss <- is.na(data[unit.rows, var])
+  
+  
+  prepped <- amelia.prep(x = data, arglist=output$arguments)
+  cross.sec <- prepped$x[!is.na(match(prepped$n.order, unit.rows)),]
+  stacked.var<-match(var,prepped$subset.index[prepped$p.order])
+  subset.var<-match(var,prepped$subset.index)
+  imps <- array(NA, dim=c(nrow(cross.sec), draws))
+
+  drawsperimp <- (1/output$m)*draws
+  
+  for (i in 1:draws) {
+    currtheta <- output$theta[,,ceiling(i/drawsperimp)]
+    imps[,i] <- amelia.impute(x = cross.sec, thetareal = currtheta,
+                              bounds = prepped$bounds,
+                              max.resample = output$arguments$max.resample)[,stacked.var]
+  }
+  
+  imps <- imps*prepped$scaled.sd[subset.var] + prepped$scaled.mu[subset.var]
+  if (var %in% output$arguments$logs) {
+    imps <- exp(imps)+prepped$xmin[which(var==output$arguments$logs)]
+  }
+  if (var %in% output$arguments$sqrt) {
+    imps <- imps^2
+  }
+  if (var %in% output$arguments$lgstc) {
+    imps <- exp(imps)/(1+exp(imps))
+  }
+  
+  outoforder <- match(prepped$n.order, unit.rows)[!is.na(match(prepped$n.order, unit.rows))]
+  imps <- imps[order(outoforder),]
+  means <- rowMeans(imps)
+
+  uppers <- apply(imps, 1, quantile, probs=(conf + (1 - conf)/2))
+  lowers <- apply(imps, 1, quantile, probs=(1-conf)/2)
+
+  if (missing(pch)) pch <- 19
+  if (missing(xlab)) xlab <- "Time"
+  if (missing(ylab)) ylab <- names(data)[var]
+  if (missing(main)) main <- cs
+  if (missing(xlim)) xlim <- range(time)
+  if (missing(ylim)) ylim <- range(c(uppers,lowers,means))
+  
+  cols <- ifelse(miss, misscol, obscol)
+  plot(x = time, y = means, col = cols, pch = pch,ylim = ylim, xlim = xlim,
+       ylab = ylab, xlab = xlab, main = main, ...)
+  segments(x0 = time, x1 = time, y0 = lowers, y1 = uppers, col = cols, ...)
+  
+  invisible(imps)
+  
+}

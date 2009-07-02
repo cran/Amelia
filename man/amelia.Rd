@@ -95,10 +95,12 @@
     Amelia. Including this object will use the arguments from that run.}
 
   \item{empri}{number indicating level of the empirical (or ridge) prior.
-    This prior shinks the covariances of the data, but keeps the means
+    This prior shrinks the covariances of the data, but keeps the means
     and variances the same for problems of high missingness, small N's or
-    large correlations among the variables.  Should be kept small; a 
-    reasonable upper bound is around 10\% of the rows of the data.}
+    large correlations among the variables.  Should be kept small,
+    perhaps 0.5 to 1 percent of the rows of the data; a
+    reasonable upper bound is around 10 percent of the rows of the
+    data.}
 
   \item{priors}{a four or five column matrix containing the priors for
     either individual missing observations or variable-wide missing
@@ -206,15 +208,13 @@ or,
   observation.}
 \item{theta}{An array with dimensions \eqn{(p+1)} by \eqn{(p+1)} by \eqn{m}  (where
   \eqn{p} is the number of variables in the imputations model) holding
-  the converged parameters for each of the \code{m} EM chains. See the
-  manual for more information.}
+  the converged parameters for each of the \code{m} EM chains.}
 \item{mu}{A \eqn{p} by \eqn{m} matrix of of the posterior modes for the
   complete-data means in each of the EM chains.}
 \item{covMatrices}{An array with dimensions \eqn{(p)} by \eqn{(p)} by
   \eqn{m} where the first two dimensions hold the posterior modes of the
   covariance matrix of the complete data for each of the EM chains.}
-\item{code}{a integer indicating the exit code of the Amelia run. See
-  the manual for a code reference.}
+\item{code}{a integer indicating the exit code of the Amelia run.}
 \item{message}{an exit message for the Amelia run}
 \item{iterHist}{a list of iteration histories for each EM chain. See
   documentation for details.}

@@ -1,6 +1,6 @@
 Package: Amelia
-Version: 1.2-9
-Date: 2009-07-02
+Version: 1.2-12
+Date: 2009-07-11
 Title: Amelia II: A Program for Missing Data
 Author: James Honaker <tercer@ucla.edu>, Gary King <king@harvard.edu>,
         Matthew Blackwell <blackwel@fas.harvard.edu>
@@ -28,6 +28,6 @@ Description: Amelia II "multiply imputes" missing data in a single
 License: GPL (>= 2)
 URL: http://gking.harvard.edu/amelia
 Suggests: tcltk, Zelig
-Packaged: 2009-07-02 15:24:13 UTC; king
+Packaged: 2009-07-11 16:18:51 UTC; king
 Repository: CRAN
-Date/Publication: 2009-07-02 16:01:53
+Date/Publication: 2009-07-18 15:21:36

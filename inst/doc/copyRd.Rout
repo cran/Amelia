@@ -1,5 +1,5 @@
 
-R version 2.9.1 (2009-06-26)
+R version 2.10.0 (2009-10-26)
 Copyright (C) 2009 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
 
@@ -29,4 +29,4 @@ Type 'q()' to quit R.
 > q("no")
 > proc.time()
    user  system elapsed 
-  0.352   0.020   0.353 
+  0.295   0.033   0.308 

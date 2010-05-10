@@ -1,6 +1,6 @@
 
-R version 2.10.1 (2009-12-14)
-Copyright (C) 2009 The R Foundation for Statistical Computing
+R version 2.11.0 (2010-04-22)
+Copyright (C) 2010 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -29,4 +29,4 @@ Type 'q()' to quit R.
 > q("no")
 > proc.time()
    user  system elapsed 
-  0.258   0.061   0.303 
+  0.314   0.038   0.323 

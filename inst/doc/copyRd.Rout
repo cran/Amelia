@@ -1,7 +1,8 @@
 
-R version 2.11.1 (2010-05-31)
-Copyright (C) 2010 The R Foundation for Statistical Computing
+R version 2.13.1 (2011-07-08)
+Copyright (C) 2011 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
+Platform: x86_64-redhat-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -20,13 +21,6 @@ Type 'q()' to quit R.
 > getwd() -> wd
 > dir.create(file.path(wd,"Rd"))
 > setwd(file.path(R.home(),"share/texmf"))
-> #setwd(file.path("/usr/share/R/texmf"))
-> file.copy(dir(), file.path(wd,"Rd"),TRUE)
-[1] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
-> setwd(file.path(wd,"../../man"))
-> file.copy(dir(patt=".Rd"), file.path(wd,"Rd"), TRUE)
- [1] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
-> q("no")
-> proc.time()
-   user  system elapsed 
-  0.308   0.021   0.325 
+Error in setwd(file.path(R.home(), "share/texmf")) : 
+  cannot change working directory
+Execution halted

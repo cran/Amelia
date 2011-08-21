@@ -4,6 +4,22 @@
 //
 //
 
+== 1.5-4 ==
+   * Fixed a bug with error messages.
+
+== 1.5-3 ==
+   * Fixed a bug with completely missing rows in the tscsPlot().
+
+== 1.5-2 (26 Apr 2011) ==
+   * Fixed a bug in the handling of priors.
+
+== 1.5-1 (23 Nov 2010) ==
+   * Fixed a bug in the new GUI where it didn't respect the "intercs" option.
+
+
+== 1.5-0 (23 Nov 2010) ==
+   * Major changes to the AmeliaView GUI. 
+
 == 1.2-18 (4 Nov 2010) ==
    * Fixed a bug when all variables are set to nominal or ordinal.
 

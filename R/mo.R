@@ -4,7 +4,7 @@
 
 
 
-moPrep <- function(x,...) {
+moPrep <- function(x, formula, subset, error.proportion, gold.standard=!missing(subset)) {
   UseMethod("moPrep",x)
 }
 
@@ -15,11 +15,10 @@ moPrep.molist <- function(x, formula, subset, error.proportion, gold.standard=FA
   res <- eval(m, sys.frame(sys.parent()))
 
   x$priors <- rbind(x$priors, res$priors)
+  x$overimp <- rbind(x$overimp, res$overimp)
   return(x)
 }
 
-
-## w1 ~ w1 | w2
 moPrep.default <- function(x, formula, subset, error.proportion, gold.standard=!missing(subset)) {
 
   if (!missing(error.proportion) &&
@@ -34,9 +33,9 @@ moPrep.default <- function(x, formula, subset, error.proportion, gold.standard=!
   proxysplit <- strsplit(deparse(formula),"\\|")[[1]]
   if (length(proxysplit) > 1) {
     proxyname <- proxysplit[[2]]
-    meanpos <- length(all.vars(formula))-1
+    meanpos <- length(all.vars(formula, unique = FALSE))-1
   } else {
-    meanpos <- length(all.vars(formula))
+    meanpos <- length(all.vars(formula, unique = FALSE))
   }
   if (!exists("proxyname") && missing(error.proportion) && !gold.standard) {
     stop("Need to specify a proxy, an error proportion, or gold-standard data.")
@@ -61,6 +60,8 @@ moPrep.default <- function(x, formula, subset, error.proportion, gold.standard=!
   } else {
     gs <- mf[0,]
   }
+  if (ncol(mf) < meanpos)
+    meanpos <- ncol(mf)
   prior.mean <- mf[,meanpos]
   var.mm <- var(mf[,1], na.rm=TRUE)
 
@@ -88,6 +89,7 @@ moPrep.default <- function(x, formula, subset, error.proportion, gold.standard=!
   rows <- as.integer(rownames(mf))
   out <- list()
   out$priors <- cbind(rows,col,prior.mean, prior.var)
+  out$overimp <- cbind(rows, col)
   if (sum(out$priors[,4] <= 0) > 0) {
     out$priors <- out$priors[out$priors[,4] > 0,]
     warning("Some observations estimated with negative measurement error variance. Set to gold standard.")

@@ -1,5 +1,5 @@
 e0817a31b0c60e62ec3f2f3198b75b65 *ChangeLog
-45da58bd58329411bafa5693d6f18c1f *DESCRIPTION
+cc1c5348b7b424bfcc750a99c10dc1bd *DESCRIPTION
 e2b4f40773d4957a6ff3cef54c5cc939 *INDEX
 c25883be6561001eba5632dc95e5fa05 *LICENSE
 445506f52abd3e1835f7598f038cfb38 *NAMESPACE
@@ -19,13 +19,14 @@ f7f9faeb497cfba6ec2a38873c0bc481 *R/zzz.R
 b76a6cd270eb24a208a1bfbccb9827e3 *README
 86a9ede313e30b97b574185b484ffeea *data/africa.RData
 05fc570eaae49e085a4f7e47edd69528 *data/freetrade.RData
+f2a9aa3a750862fd528d5b3b8d36dfd3 *inst/CITATION
 434872c185352c3e53dcd62907c41fdf *inst/doc/Makefile
 04f6681a198ff53c82fd817af394eeda *inst/doc/action_go.gif
 77065468f34e1ca5cc157a1b2981c717 *inst/doc/action_save.gif
 ed7fc633e7eee3181358f1952e6431d2 *inst/doc/action_stop.gif
-b2a10476ba543b424bfbb0ba15c716b6 *inst/doc/amelia.Rnw
+040d91085e04fb6841e099f4fa2802f0 *inst/doc/amelia.Rnw
 d385c634a375c5f8c298cd9574814274 *inst/doc/amelia.ico
-965372e5e592a803f0389225d281663e *inst/doc/amelia.pdf
+c3c68fd3a38d1acbb61ba780c491a3a1 *inst/doc/amelia.pdf
 53276025c89eb6d7dff9625c46d196b4 *inst/doc/arrow_down.gif
 f816544708aa47cc40a5f91c2dac6b76 *inst/doc/arrow_left.gif
 639e1bd5c6199c1bb2717584c02b23ef *inst/doc/arrow_up.gif
@@ -59,8 +60,8 @@ edc79234c547cf5bf3b55693053108e2 *inst/doc/page_text.gif
 9b97c9abda11ed64b980f4991685b1ff *inst/doc/table.gif
 98f454b56966d111475aeb4264e25649 *inst/doc/utf8.def
 df988bd08b26c3663d192dc00275c0b7 *man/africa.Rd
-b80e3846975635b26e318904f420b07e *man/amelia.Rd
-d098f516d40a17bdb4a03edd150535a9 *man/amelia.package.Rd
+8d50a2267dd07ab276dfd3615cf7e57d *man/amelia.Rd
+74e6fdeed2b0cf6ba588c90c278568b4 *man/amelia.package.Rd
 1b3337bce312567f7eb0ffc9c80c01ba *man/ameliabind.Rd
 9d55d9d16e6f401a1121c668041f5964 *man/ameliagui.Rd
 9ed63feb21622febcdcfd655f352c043 *man/combine.output.Rd

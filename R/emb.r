@@ -96,7 +96,7 @@ bootx<-function(x,priors=NULL){
                                         # priors[,1]<-match(priors[,1],order)
                                         #priors <- priors[!is.na(priors[,1]),,drop=FALSE]
     }
-    
+
     flag<-any(colSums(is.na(xboot))==AMn & !((1:ncol(xboot)) %in% priors[,2]))
   }
   return(list(x=xboot,priors=priors))
@@ -483,7 +483,7 @@ amelia.impute<-function(x,thetareal,priors=NULL,bounds=NULL,max.resample=NULL){
         hold<-chol(theta[c(FALSE,m[ss,]),c(FALSE,m[ss,])])
         Ci[m[ss,],m[ss,]]<-hold
 
-        
+
         if (!identical(bounds,NULL)) {
           xplay[(is:isp)[nopri],] <- am.resample(x.ss=x[(is:isp)[nopri],,drop=FALSE], ci=Ci,
                                                  imps=imputations[nopri,,drop=FALSE],
@@ -873,72 +873,96 @@ am.inv <- function(a,tol=.Machine$double.eps) {
 ameliabind <- function(...) {
   args <- list(...)
 
-  if (length(args) < 2)
-    stop("We need at least two amelia outputs to bind")
-
-  if (any(lapply(args, class)!="amelia"))
+  if (any(!sapply(args, is, "amelia")))
     stop("All arguments must be amelia output.")
 
-  ## test that data is the same. we'll just compare the missMatrices.
-  ## this will allow datasets with the same size and missingness
-  ## matrix to be combined unintentionally, but this seems unlikely.
-  datacheck <- lapply(args,
-                      function(x) isTRUE(identical(x$missMatrix,args[[1]]$missMatrix)))
-  if (any(!unlist(datacheck)))
-    stop("Non-compatible datasets.")
+  if (length(args) > 1) {
+    ## test that data is the same. we'll just compare the missMatrices.
+    ## this will allow datasets with the same size and missingness
+    ## matrix to be combined unintentionally, but this seems unlikely.
+    datacheck <- lapply(args,
+                        function(x) isTRUE(identical(x$missMatrix,args[[1]]$missMatrix)))
+    if (any(!unlist(datacheck)))
+      stop("Non-compatible datasets.")
 
-  ## test that all the arguments are the same
-  check <- lapply(args,
-                  function(x) isTRUE(identical(x$arguments, args[[1]]$arguments)))
-  if (any(!unlist(check)))
-    stop("Non-compatible amelia arguments")
+    ## test that all the arguments are the same
+    check <- lapply(args,
+                    function(x) isTRUE(identical(x$arguments, args[[1]]$arguments)))
+    if (any(!unlist(check)))
+      stop("Non-compatible amelia arguments")
 
-  imps <- unlist(lapply(args, function(x) return(x$m)))
-  newm <- sum(imps)
-  impindex <- c(0,cumsum(imps))
+    check <- lapply(args,
+                    function(x) isTRUE(identical(x$transform.calls,
+                                                 args[[1]]$transform.calls)))
+    if (any(!unlist(check)))
+      stop("Non-compatible transformations on imputed datasets")
 
-  k <- nrow(args[[1]]$mu)
-  out  <- list(imputations = list(),
-               m           = integer(0),
-               missMatrix  = matrix(NA,0,0),
-               theta       = array(NA, dim = c(k+1,k+1,newm) ),
-               mu          = matrix(NA, nrow = k, ncol = newm),
-               covMatrices = array(NA, dim = c(k,k,newm)),
-               code        = integer(0),
-               message     = character(0),
-               iterHist    = list(),
-               arguments   = list())
+    imps <- unlist(lapply(args, function(x) return(x$m)))
+    newm <- sum(imps)
+    impindex <- c(0,cumsum(imps))
 
-  out$m <- newm
-  out$missMatrix <- args[[1]]$missMatrix
-  out$arguments <- args[[1]]$arguments
+    k <- nrow(args[[1]]$mu)
+    out  <- list(imputations = list(),
+                 m           = integer(0),
+                 missMatrix  = matrix(NA,0,0),
+                 overvalues  = args[[1]]$overvalues,
+                 theta       = array(NA, dim = c(k+1,k+1,newm) ),
+                 mu          = matrix(NA, nrow = k, ncol = newm),
+                 covMatrices = array(NA, dim = c(k,k,newm)),
+                 code        = integer(0),
+                 message     = character(0),
+                 iterHist    = list(),
+                 arguments   = list(),
+                 orig.vars   = args[[1]]$orig.vars)
 
-  ## since code==1 is good and code==2 means we have an NA,
-  ## then our new output should inherit a 2 if there are any
-  out$code <- max(unlist(lapply(args,function(x) return(x$code))))
+    out$m <- newm
+    out$missMatrix <- args[[1]]$missMatrix
+    out$arguments <- args[[1]]$arguments
+    out$transform.calls <- args[[1]]$transform.calls
+    out$transform.vars <- args[[1]]$trasnform.vars
 
-  if (out$code > 2)
-    stop("Amelia output contains error.")
-  if (out$code==2)
-    out$message <- "One or more of the imputations resulted in a covariance matrix that was not invertible."
-  else
-    out$message <- "Normal EM convergence"
+    ## since code==1 is good and code==2 means we have an NA,
+    ## then our new output should inherit a 2 if there are any
+    out$code <- max(unlist(lapply(args,function(x) return(x$code))))
 
-  for (i in 1:length(args)) {
-    currimps <- (impindex[i]+1):impindex[i+1]
-    out$mu[,currimps] <- args[[i]]$mu
-    out$theta[,,currimps] <- args[[i]]$theta
-    out$covMatrices[,,currimps] <- args[[i]]$covMatrices
-    out$imputations <- c(out$imputation, args[[i]]$imputations)
-    out$iterHist    <- c(out$iterHist, args[[i]]$iterHist)
+    if (out$code > 2)
+      stop("Amelia output contains error.")
+    if (out$code==2)
+      out$message <- "One or more of the imputations resulted in a covariance matrix that was not invertible."
+    else
+      out$message <- "Normal EM convergence"
 
+    for (i in 1:length(args)) {
+      currimps <- (impindex[i]+1):impindex[i+1]
+      out$mu[,currimps] <- args[[i]]$mu
+      out$theta[,,currimps] <- args[[i]]$theta
+      out$covMatrices[,,currimps] <- args[[i]]$covMatrices
+      out$imputations <- c(out$imputations, args[[i]]$imputations)
+      out$iterHist    <- c(out$iterHist, args[[i]]$iterHist)
+
+    }
+    class(out) <- "amelia"
+    class(out$imputations) <- c("mi","list")
+  } else {
+    out <- args
   }
-  class(out) <- "amelia"
-  class(out$imputations) <- c("mi","list")
   return(out)
 }
 
 getOriginalData <- function(obj) {
+  data <- obj$imputations[[1]]
+  is.na(data) <- obj$missMatrix
+  data <- data[, obj$orig.vars]
+  oi <- obj$arguments$overimp
+  if (!is.null(oi)) {
+    for (i in 1:nrow(oi)) {
+      data[oi[i,1], oi[i,2]] <- obj$overvalues[i]
+    }
+  }
+  return(data)
+}
+
+remove.imputations <- function(obj) {
   data <- obj$imputations[[1]]
   is.na(data) <- obj$missMatrix
   oi <- obj$arguments$overimp
@@ -962,10 +986,22 @@ amelia.amelia <- function(x, m = 5, p2s = 1, frontend = FALSE, ...) {
   ## The original data is the imputed data with the
   ## imputations marked to NA. These two lines do that
   data <- x$imputations[[1]]
-  is.na(data) <- x$missMatrix
+
+  ## Only the variables in the missMatrix should be passed. This is
+  ## because the others are
+  data <- getOriginalData(x)
 
   out <- amelia.default(x = data, m = m, arglist=x$arguments, p2s=p2s,
                         frontend = frontend, incheck=FALSE)
+  num.tcalls <- length(x$transform.calls)
+  if (num.tcalls > 0) {
+    for (i in 1:num.tcalls) {
+      tcall <- x$transform.calls[[i]]
+      tcall[[2]] <- as.name("out")
+      out <- eval(tcall)
+    }
+    out$transform.calls <- x$transform.calls
+  }
   ret <- ameliabind(x, out)
   return(ret)
 }
@@ -978,7 +1014,7 @@ amelia.molist <- function(x, ...) {
   m$overimp <- x$overimp
   m[[1]] <- as.name("amelia.default")
   ret <- eval(m)
-                                        #  ret <- eval(m, sys.frame(sys.parent()))
+
   return(ret)
 }
 
@@ -1021,6 +1057,11 @@ amelia.default <- function(x, m = 5, p2s = 1, frontend = FALSE, idvars=NULL,
   }
 
   k <- ncol(prepped$x)
+  if (!is.null(colnames(x))) {
+    ovars <- colnames(x)
+  } else {
+    ovars <- 1:k
+  }
   impdata <- list(imputations = list(),
                   m           = integer(0),
                   missMatrix  = prepped$missMatrix,
@@ -1031,7 +1072,8 @@ amelia.default <- function(x, m = 5, p2s = 1, frontend = FALSE, idvars=NULL,
                   code        = integer(0),
                   message     = character(0),
                   iterHist    = list(),
-                  arguments   = list())
+                  arguments   = list(),
+                  orig.vars   = ovars)
 
   impdata$m <- m
   class(impdata) <- "amelia"
@@ -1123,7 +1165,7 @@ your data for highly collinear variables.\n\n")
     putAmelia("output.log", c(getAmelia("output.log"),paste(impdata$message,"\n")))
   }
                                         #  if (archive)
-  
+
   names(impdata$imputations) <- paste("imp", 1:m, sep = "")
   impdata$arguments <- prepped$archv
   class(impdata$arguments) <- c("ameliaArgs", "list")

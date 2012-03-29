@@ -66,7 +66,7 @@ citebordercolor={0 0 1}]{hyperref}
 \title{${\mathbb{AMELIA~II}}$: A Program for Missing Data}
 
 % rbuild: replace 'Version ' '\\' Version
-\date{Version 1.5-5\\ \today}
+\date{Version 1.6.1\\ \today}
 
 \author{James Honaker, Gary King, and Matthew Blackwell}
 
@@ -614,6 +614,18 @@ simply change the \code{format} argument to \code{"dta"},
 \begin{verbatim}
 > write.amelia(obj=a.out, file.stem = "outdata", format = "dta")
 \end{verbatim}
+
+Additionally, \code{write.amelia} can create a ``stacked'' version of
+the imputed dataset which stacks each imputed dataset on top of one
+another. This can be done by setting the \code{separate} argument to
+\code{FALSE}. The resulting matrix is of size $(N \cdot m) \times p$
+if the original dataset is excluded (\code{orig.data = FALSE}) and of
+size $(N \cdot (m+1))\times p$ if it is included (\code{orig.data =
+  TRUE}). The stacked dataset will include a variable (set with
+\code{impvar}) that indicates to which imputed dataset the observation
+belongs. See Section~\ref{sec:analysis} for a description of how to
+use this stacked dataset with the \code{mi} commands in Stata. 
+
 
 \subsubsection{Combining Multiple \Amelia\ Runs}
 The EMB algorithm is what computer scientists call \emph{embarrassingly
@@ -1700,7 +1712,32 @@ The missingness map is an important tool for understanding the patterns of
 missingness in the data and can often indicate potential ways to improve
 the imputation model or data collection process. 
 
-
+\subsection{Post-imputation Transformations}
+\label{sec:postimptrans}
+In many cases, it is useful to create transformations of the imputed
+varibles for use in further analysis. For instance, one may want to
+create an interaction between two variables or perform a
+log-transformation on the imputed data. To do this, \Amelia\ includes
+a \code{transform} function for \code{amelia} output that adds or
+overwrites variables in each of the imputed datasets. For instance, if we wanted to create a log-transformation of the \code{gdp.pc}
+variable, we could use the following command:
+<<>>=
+a.out <- transform(a.out, lgdp = log(gdp.pc))
+head(a.out$imputations[[1]][,c("country", "year","gdp.pc", "lgdp")])
+@ 
+To create an interaction between two variables, we could simply use:
+<<>>=
+a.out <- transform(a.out, pol_gdp = polity * gdp.pc)
+@ 
+Each transformation is recorded and the \code{summary} command prints
+out each transformation that has been performed:
+<<>>=
+summary(a.out)
+@ 
+Note the updated output is almost exactly the same as the fresh
+\code{amelia} output. You can pass the transformed output back to
+\code{amelia} and it will add imputations and update these imputations
+with the transformations you have performed. 
 \subsection{Analysis Models}
 \label{sec:analysis}
 
@@ -1746,7 +1783,70 @@ export their imputations using the \code{write.amelia} function as
 described in \ref{sec:saving} and use statistical packages other than {\sf
   R} for the analysis model. 
 
-%% add example loop here?
+\Amelia\ also has the ability combine quantities of interest from
+arbitrary models using the \code{mi.meld} function. This command takes
+in a matrix with columns for the quantity and its standard error in
+each of the imputed datasets. It then uses the standard rules for
+combining multiple imputations to create an overall estimated quantity.
+
+<<>>=
+b.out<-NULL
+se.out<-NULL
+for(i in 1:a.out$m) {
+  ols.out <- lm(tariff ~ polity + pop + gdp.pc, data = a.out$imputations[[i]])
+  b.out <- rbind(b.out, ols.out$coef)
+  se.out <- rbind(se.out, coef(summary(ols.out))[,2])
+}
+
+combined.results <- mi.meld(q = b.out, se = se.out)
+combined.results
+@ 
+
+In addition to the resources available in {\sf R}, users can draw on
+Stata to implement their analysis models. As of version 11,
+  Stata has built-in handling of multiply imputed datasets. In order
+to utilize this functionality, simply export the ``stacked''
+imputations using the \code{write.amelia} function:
+
+\begin{verbatim}
+> write.amelia(a.out, separate = FALSE, file.stem = "outdata", format = "dta")
+\end{verbatim}
+
+Once this stacked dataset is open in Stata, you must tell Stata that
+it is an imputed dataset using the \code{mi import flong} command:
+\begin{verbatim}
+mi import flong, m(imp) id(year country) imp(tariff-usheg)
+\end{verbatim}
+The command takes a few options: \code{m} designates the imputation
+variable (set with \code{impvar} in \code{write.amelia}), \code{id}
+ sets the identifying varibles, and \code{imp} sets the variables that
+ were imputed (or included in the imputation). The \code{tariff-usheg}
+ indicates that Stata should treat the range of variables between
+ \code{tariff} and \code{usheg} as imputed. Once we have set the
+ dataset as imputed, we can use the built-in \code{mi} commands to
+ analyze the data:
+\begin{verbatim}
+. mi estimate: reg tariff polity pop gdp_pc
+
+Multiple-imputation estimates                     Imputations     =          5
+Linear regression                                 Number of obs   =        171
+                                                  Average RVI     =     1.4114
+                                                  Complete DF     =        167
+DF adjustment:   Small sample                     DF:     min     =      10.36
+                                                          avg     =      18.81
+                                                          max     =      37.62
+Model F test:       Equal FMI                     F(   2,   10.4) =      15.50
+Within VCE type:          OLS                     Prob > F        =     0.0008
+
+------------------------------------------------------------------------------
+      tariff |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+      polity |  -.2058115   .3911049    -0.53   0.610    -1.072968    .6613452
+         pop |   3.21e-08   8.72e-09     3.68   0.004     1.27e-08    5.14e-08
+      gdp_pc |  -.0027561    .000644    -4.28   0.000    -.0040602   -.0014519
+       _cons |   32.70461   2.660091    12.29   0.000     27.08917    38.32005
+------------------------------------------------------------------------------
+\end{verbatim}
 
 
 \subsection{The \texttt{amelia} class}
@@ -1959,7 +2059,8 @@ variable-level options, but global options are set in the
   object (.RData), or to hold it in \R\ memory. This last option will only
   work if you have called \AmeliaView\ from an \R\ session and want to
   return to the \R\ command line to work with the output. Its name in
-  R workspace will be the file prefix. 
+  R workspace will be the file prefix. The stacked version of the
+  Stata output will work with their built-in \code{mi} tools. 
 
 \end{enumerate}
 

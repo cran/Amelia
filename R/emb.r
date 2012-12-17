@@ -230,9 +230,8 @@ amsweep<-function(g,m,reverse=FALSE){
         g22<-g[kcompl,kcompl , drop=FALSE]
 
         ## this doesn't actually save us much time.
-        h11a <- try(am.inv(a = g11), silent = TRUE)
-
-                                        #h11a<-try(solve(g11),silent=TRUE)
+        #h11a <- try(am.inv(a = g11), silent = TRUE)  # This fails from R 2.15 because of change to LAPACK.
+        h11a<-try(solve(g11),silent=TRUE)
         if (inherits(h11a,"try-error")) {
           h11a<-mpinv(g11)     # This is where significant time is spent!
                                         # About as much time as in the rest of the EM
@@ -855,11 +854,7 @@ am.inv <- function(a,tol=.Machine$double.eps) {
     return(1/a)
   storage.mode(a) <- "double"
   size <- ncol(a)
-  .Call("La_chol2inv",.Call("La_chol",a,PACKAGE="base"),size,PACKAGE="base")
-
-                                        #storage.mode(a) <- "double"
-                                        #storage.mode(b) <- "double"
-                                        #.Call("La_dgesv",a,b,tol)
+  chol2inv(chol.default(a), ncol(a))
 }
 
 ##

@@ -452,29 +452,30 @@ summary(a.out)
 
 
 ###################################################
-### code chunk number 64: amelia.Rnw:1803-1805
+### code chunk number 64: amelia.Rnw:1803-1806
 ###################################################
 require(Zelig)
-z.out <- zelig(tariff ~ polity + pop + gdp.pc + year +country, data = freetrade, model = "ls")
+z5 <- zls$new()
+z5$zelig(tariff ~ polity + pop + gdp.pc + year + country, data = freetrade)
 
 
 ###################################################
-### code chunk number 65: amelia.Rnw:1808-1809
+### code chunk number 65: amelia.Rnw:1809-1810
 ###################################################
-summary(z.out)
+z5
 
 
 ###################################################
 ### code chunk number 66: amelia.Rnw:1817-1819
 ###################################################
-z.out.imp <- zelig(tariff ~ polity + pop + gdp.pc + year +country, data =
-                   a.out$imputations, model = "ls")
+z5 <- zls$new()
+z5$zelig(tariff ~ polity + pop + gdp.pc + year + country, data = a.out)
 
 
 ###################################################
 ### code chunk number 67: amelia.Rnw:1822-1823
 ###################################################
-summary(z.out.imp)
+z5
 
 
 ###################################################

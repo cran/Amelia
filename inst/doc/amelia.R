@@ -1,4 +1,5 @@
 ### R code from vignette source 'amelia.Rnw'
+### Encoding: UTF-8
 
 ###################################################
 ### code chunk number 1: amelia.Rnw:78-79
@@ -452,37 +453,44 @@ summary(a.out)
 
 
 ###################################################
-### code chunk number 64: amelia.Rnw:1803-1806
+### code chunk number 64: amelia.Rnw:1803-1809
 ###################################################
-require(Zelig)
-z5 <- zls$new()
-z5$zelig(tariff ~ polity + pop + gdp.pc + year + country, data = freetrade)
+if (requireNamespace("Zelig", quietly = TRUE)) {
+  z5 <- Zelig::zls$new()
+  z5$zelig(tariff ~ polity + pop + gdp.pc + year + country, data = freetrade)
+} else {
+  z5 <- "Error: Zelig package not avaiable when vignette built"
+}
 
 
 ###################################################
-### code chunk number 65: amelia.Rnw:1809-1810
+### code chunk number 65: amelia.Rnw:1812-1813
 ###################################################
-z5
+z5 
 
 
 ###################################################
-### code chunk number 66: amelia.Rnw:1817-1819
+### code chunk number 66: amelia.Rnw:1820-1826
 ###################################################
-z5 <- zls$new()
-z5$zelig(tariff ~ polity + pop + gdp.pc + year + country, data = a.out)
+if (requireNamespace("Zelig", quietly = TRUE)) {
+  z5 <- Zelig::zls$new()
+  z5$zelig(tariff ~ polity + pop + gdp.pc + year + country, data = a.out)
+} else {
+  z5 <- "Error: Zelig package not avaiable when vignette built"
+}
 
 
 ###################################################
-### code chunk number 67: amelia.Rnw:1822-1823
+### code chunk number 67: amelia.Rnw:1829-1830
 ###################################################
-z5
+z5 
 
 
 ###################################################
-### code chunk number 68: amelia.Rnw:1843-1853
+### code chunk number 68: amelia.Rnw:1849-1859
 ###################################################
-b.out<-NULL
-se.out<-NULL
+b.out <- NULL
+se.out <- NULL
 for(i in 1:a.out$m) {
   ols.out <- lm(tariff ~ polity + pop + gdp.pc, data = a.out$imputations[[i]])
   b.out <- rbind(b.out, ols.out$coef)

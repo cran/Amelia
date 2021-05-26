@@ -1,11 +1,13 @@
 Package: Amelia
-Version: 1.7.6
-Date: 2019-11-24
+Version: 1.8.0
+Date: 2021-05-26
 Title: A Program for Missing Data
-Author: James Honaker <james@hona.kr>,
-        Gary King <king@harvard.edu>,
-        Matthew Blackwell <mblackwell@gov.harvard.edu>
-Maintainer: Matthew Blackwell <mblackwell@gov.harvard.edu>
+Authors@R: c(
+    person("James", "Honaker", email = "james@hona.kr", role = c("aut")),
+    person("Gary", "King", email = "king@harvard.edu", role = c("aut")),
+    person("Matthew", "Blackwell", email = "mblackwell@gov.harvard.edu",
+           role = c("aut", "cre"), comment = c(ORCID = "0000-0002-3689-9527"))
+    )
 Depends: R (>= 3.0.2), Rcpp (>= 0.11)
 Imports: foreign, utils, grDevices, graphics, methods, stats
 LinkingTo: Rcpp (>= 0.11), RcppArmadillo
@@ -27,12 +29,17 @@ Description: A tool that "multiply imputes" missing data in a single cross-secti
   works from the R command line or via a graphical user interface that
   does not require users to know R.
 License: GPL (>= 2)
-URL: http://gking.harvard.edu/amelia
-Suggests: tcltk, Zelig
+URL: https://gking.harvard.edu/amelia
+Suggests: tcltk, Zelig, rmarkdown, knitr
+VignetteBuilder: knitr
 RoxygenNote: 6.1.0
 Encoding: UTF-8
 LazyData: true
 NeedsCompilation: yes
-Packaged: 2019-11-25 04:04:45 UTC; mblackwell
+Packaged: 2021-05-26 15:09:11 UTC; mblackwell
+Author: James Honaker [aut],
+  Gary King [aut],
+  Matthew Blackwell [aut, cre] (<https://orcid.org/0000-0002-3689-9527>)
+Maintainer: Matthew Blackwell <mblackwell@gov.harvard.edu>
 Repository: CRAN
-Date/Publication: 2019-11-25 15:30:05 UTC
+Date/Publication: 2021-05-26 18:40:02 UTC

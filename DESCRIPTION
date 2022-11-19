@@ -1,6 +1,6 @@
 Package: Amelia
-Version: 1.8.0
-Date: 2021-05-26
+Version: 1.8.1
+Date: 2022-11-18
 Title: A Program for Missing Data
 Authors@R: c(
     person("James", "Honaker", email = "james@hona.kr", role = c("aut")),
@@ -9,7 +9,7 @@ Authors@R: c(
            role = c("aut", "cre"), comment = c(ORCID = "0000-0002-3689-9527"))
     )
 Depends: R (>= 3.0.2), Rcpp (>= 0.11)
-Imports: foreign, utils, grDevices, graphics, methods, stats
+Imports: foreign, utils, grDevices, graphics, methods, stats, rlang
 LinkingTo: Rcpp (>= 0.11), RcppArmadillo
 Description: A tool that "multiply imputes" missing data in a single cross-section
   (such as a survey), from a time series (like variables collected for
@@ -30,16 +30,16 @@ Description: A tool that "multiply imputes" missing data in a single cross-secti
   does not require users to know R.
 License: GPL (>= 2)
 URL: https://gking.harvard.edu/amelia
-Suggests: tcltk, Zelig, rmarkdown, knitr
+Suggests: tcltk, broom, rmarkdown, knitr
 VignetteBuilder: knitr
-RoxygenNote: 6.1.0
+RoxygenNote: 7.2.1
 Encoding: UTF-8
 LazyData: true
 NeedsCompilation: yes
-Packaged: 2021-05-26 15:09:11 UTC; mblackwell
+Packaged: 2022-11-18 19:28:14 UTC; mblackwell
 Author: James Honaker [aut],
   Gary King [aut],
   Matthew Blackwell [aut, cre] (<https://orcid.org/0000-0002-3689-9527>)
 Maintainer: Matthew Blackwell <mblackwell@gov.harvard.edu>
 Repository: CRAN
-Date/Publication: 2021-05-26 18:40:02 UTC
+Date/Publication: 2022-11-19 19:40:29 UTC

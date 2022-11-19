@@ -146,43 +146,20 @@ a.out <- transform(a.out, pol_gdp = polity * gdp.pc)
 ## ----sum_trans----------------------------------------------------------------
 summary(a.out)
 
-## ----zelig_run_lwd, echo = FALSE----------------------------------------------
-if (requireNamespace("Zelig", quietly = TRUE)) {
-  z5 <- Zelig::zls$new()
-  z5$zelig(tariff ~ polity + pop + gdp.pc + year + country, data = freetrade)
-} else {
-  z5 <- "Error: Zelig package not avaiable when vignette built"
-}
+## ----lm_lwd-------------------------------------------------------------------
+orig.model <- lm(tariff ~ polity + pop + gdp.pc + year + country, data = freetrade)
+orig.model
 
-## ----eval = 3-----------------------------------------------------------------
-z5 <- Zelig::zls$new()
-z5$zelig(tariff ~ polity + pop + gdp.pc + year + country, data = freetrade)
-z5
+## ----lm_imp-------------------------------------------------------------------
+imp.models <- with(
+  a.out,
+  lm(tariff ~ polity + pop + gdp.pc + year + country)
+)
+imp.models[1:2]
 
-## ----zelig_run_imp, echo = FALSE----------------------------------------------
-if (requireNamespace("Zelig", quietly = TRUE)) {
-  z5_imp <- Zelig::zls$new()
-  z5_imp$zelig(tariff ~ polity + pop + gdp.pc + year + country, data = freetrade)
-} else {
-  z5_imp <- "Error: Zelig package not avaiable when vignette built"
-}
-
-## ----eval = 3-----------------------------------------------------------------
-z5_imp <- Zelig::zls$new()
-z5_imp$zelig(tariff ~ polity + pop + gdp.pc + year + country, data = a.out)
-z5_imp
-
-## ----mi_meld------------------------------------------------------------------
-b.out <- NULL
-se.out <- NULL
-for(i in seq_len(a.out$m)) {
-  ols.out <- lm(tariff ~ polity + pop + gdp.pc, data = a.out$imputations[[i]])
-  b.out <- rbind(b.out, ols.out$coef)
-  se.out <- rbind(se.out, coef(summary(ols.out))[, 2])
-}
-
-combined.results <- mi.meld(q = b.out, se = se.out)
-combined.results
+## ----mi_combine---------------------------------------------------------------
+out <- mi.combine(imp.models, conf.int = TRUE)
+out
 
 ## ----write_dta_stacked, eval = FALSE------------------------------------------
 #  write.amelia(a.out, separate = FALSE, file.stem = "outdata", format = "dta")

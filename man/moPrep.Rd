@@ -6,14 +6,25 @@
 \alias{moPrep.default}
 \title{Prepare Multiple Overimputation Settings}
 \usage{
-moPrep(x, formula, subset, error.proportion,
-  gold.standard = !missing(subset), error.sd)
+moPrep(
+  x,
+  formula,
+  subset,
+  error.proportion,
+  gold.standard = !missing(subset),
+  error.sd
+)
 
-\method{moPrep}{molist}(x, formula, subset, error.proportion,
-  gold.standard = FALSE, error.sd)
+\method{moPrep}{molist}(x, formula, subset, error.proportion, gold.standard = FALSE, error.sd)
 
-\method{moPrep}{default}(x, formula, subset, error.proportion,
-  gold.standard = !missing(subset), error.sd)
+\method{moPrep}{default}(
+  x,
+  formula,
+  subset,
+  error.proportion,
+  gold.standard = !missing(subset),
+  error.sd
+)
 }
 \arguments{
 \item{x}{either a matrix, data.frame, or a object of class "molist"
@@ -82,11 +93,11 @@ This function generates priors for multiple overimputation of data
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{molist}: Alter existing moPrep output
+\item \code{moPrep(molist)}: Alter existing moPrep output
 
-\item \code{default}: Default call to moPrep
+\item \code{moPrep(default)}: Default call to moPrep
+
 }}
-
 \examples{
  data(africa)
  m.out <- moPrep(africa, trade ~ trade, error.proportion = 0.1)

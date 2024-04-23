@@ -39,7 +39,7 @@ We now demonstrate how to use Amelia using data from @MilKub05 which studies the
  These variables correspond to the variables used in the analysis model of @MilKub05 in table 2.
 
 [^freetrade]: We have artificially addedsome missingness to these data for presentational purposes. You can access the original data at
-  [https://scholar.princeton.edu/hvmilner/data](https://scholar.princeton.edu/hvmilner/data).
+  [https://hvmilner.scholar.princeton.edu/data](https://hvmilner.scholar.princeton.edu/data).
 
 [^polity]: The Polity score is a number between -10 and 10 indicating how democratic a country is. A fully autocratic country would be a -10 while a fully democratic country would be 1 10.
 
@@ -508,7 +508,7 @@ out <- mi.combine(imp.models, conf.int = TRUE)
 out
 ```
 
-The combination of the results depends on the [broom](https://broom.tidymodels.org) package and results can be combined if a `tidy()` method exists for the estimation function passed to `with()`. Other packages such as [Zelig](https://zeligproject.org) can also combine imputed data sets across a number of statistical models. Furthermore, users can easily export their imputations using the `write.amelia()` function as described in \@ref(sec_saving) and use statistical packages other than R for the analysis model.
+The combination of the results depends on the [broom](https://broom.tidymodels.org) package and results can be combined if a `tidy()` method exists for the estimation function passed to `with()`. Other packages such as [Zelig](https://docs.zeligproject.org/index.html) can also combine imputed data sets across a number of statistical models. Furthermore, users can easily export their imputations using the `write.amelia()` function as described in \@ref(sec_saving) and use statistical packages other than R for the analysis model.
 
 In addition to the resources available in R, users can draw on
 Stata to implement their analysis models. As of version 11,

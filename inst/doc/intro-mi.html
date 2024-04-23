@@ -11,7 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 
-<meta name="date" content="2022-11-18" />
+<meta name="date" content="2024-04-23" />
 
 <title>Introduction to Multiple Imputation</title>
 
@@ -30,13 +30,13 @@ document.addEventListener('DOMContentLoaded', function(e) {
 </script>
 
 <style type="text/css">
-  code{white-space: pre-wrap;}
-  span.smallcaps{font-variant: small-caps;}
-  span.underline{text-decoration: underline;}
-  div.column{display: inline-block; vertical-align: top; width: 50%;}
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-  ul.task-list{list-style: none;}
-    </style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
 
 
 
@@ -44,25 +44,25 @@ document.addEventListener('DOMContentLoaded', function(e) {
 
 
 <style type="text/css">
-/* for pandoc --citeproc since 2.11 */
+
 div.csl-bib-body { }
 div.csl-entry {
-  clear: both;
+clear: both;
 }
 .hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
+margin-left:2em;
+text-indent:-2em;
 }
 div.csl-left-margin {
-  min-width:2em;
-  float:left;
+min-width:2em;
+float:left;
 }
 div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
+margin-left:2em;
+padding-left:1em;
 }
 div.csl-indent {
-  margin-left: 2em;
+margin-left: 2em;
 }
 </style>
 
@@ -259,7 +259,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 
 <h1 class="title toc-ignore">Introduction to Multiple Imputation</h1>
-<h4 class="date">2022-11-18</h4>
+<h4 class="date">2024-04-23</h4>
 
 
 
@@ -286,20 +286,19 @@ technical nature of algorithms involved.  provides users with a simple
 way to create and implement an imputation model, generate imputed
 datasets, and check its fit using diagnostics.</p>
 <p>The Amelia program goes several significant steps beyond the
-capabilities of the first version of Amelia <span class="citation">(<a href="#ref-HonJosKin98" role="doc-biblioref">Honaker et al.
-1998-2002</a>)</span>. For one, the bootstrap-based EMB algorithm
-included in Amelia can impute many more variables, with many more
-observations, in much less time. The great simplicity and power of the
-EMB algorithm made it possible to write Amelia so that it virtually
-never crashes — which to our knowledge makes it unique among all
-existing multiple imputation software — and is much faster than the
-alternatives too. Amelia also has features to make valid and much more
-accurate imputations for cross-sectional, time-series, and
-time-series-cross-section data, and allows the incorporation of
-observation and data-matrix-cell level prior information. In addition to
-all of this, Amelia provides many diagnostic functions that help users
-check the validity of their imputation model. This software implements
-the ideas developed in <span class="citation">Honaker and King (<a href="#ref-HonKin10" role="doc-biblioref">2010</a>)</span>.</p>
+capabilities of the first version of Amelia <span class="citation">(<a href="#ref-HonJosKin98">Honaker et al. 1998-2002</a>)</span>. For one,
+the bootstrap-based EMB algorithm included in Amelia can impute many
+more variables, with many more observations, in much less time. The
+great simplicity and power of the EMB algorithm made it possible to
+write Amelia so that it virtually never crashes — which to our knowledge
+makes it unique among all existing multiple imputation software — and is
+much faster than the alternatives too. Amelia also has features to make
+valid and much more accurate imputations for cross-sectional,
+time-series, and time-series-cross-section data, and allows the
+incorporation of observation and data-matrix-cell level prior
+information. In addition to all of this, Amelia provides many diagnostic
+functions that help users check the validity of their imputation model.
+This software implements the ideas developed in <span class="citation">Honaker and King (<a href="#ref-HonKin10">2010</a>)</span>.</p>
 </div>
 <div id="sec:what" class="section level2">
 <h2>What Amelia Does</h2>
@@ -335,7 +334,7 @@ multivariate normal distribution with mean vector <span class="math inline">\(\m
 distribution is often a crude approximation to the true distribution of
 the data, yet there is evidence that this model works as well as other,
 more complicated models even in the face of categorical or mixed data
-<span class="citation">Schafer and Olsen (<a href="#ref-SchOls98" role="doc-biblioref">1998</a>)</span>. Furthermore, transformations of
+<span class="citation">Schafer and Olsen (<a href="#ref-SchOls98">1998</a>)</span>. Furthermore, transformations of
 many types of variables can often make this normality assumption more
 plausible (see @ref(sec:trans) for more information on how to implement
 this in Amelia).</p>
@@ -387,14 +386,13 @@ is</p>
   dD^{mis}.
 \end{equation}\]</span></p>
 <p>The main computational difficulty in the analysis of incomplete data
-is taking draws from this posterior. The EM algorithm <span class="citation">(<a href="#ref-DemLaiRub77" role="doc-biblioref">Dempster, Laird, and Rubin 1977</a>)</span> is a
-simple computational approach to finding the mode of the posterior. Our
-EMB algorithm combines the classic EM algorithm with a bootstrap
-approach to take draws from this posterior. For each draw, we bootstrap
-the data to simulate estimation uncertainty and then run the EM
-algorithm to find the mode of the posterior for the bootstrapped data,
-which gives us fundamental uncertainty too <span class="citation">(see
-<a href="#ref-HonKin10" role="doc-biblioref">Honaker and King 2010</a>
+is taking draws from this posterior. The EM algorithm <span class="citation">(<a href="#ref-DemLaiRub77">Dempster, Laird, and Rubin
+1977</a>)</span> is a simple computational approach to finding the mode
+of the posterior. Our EMB algorithm combines the classic EM algorithm
+with a bootstrap approach to take draws from this posterior. For each
+draw, we bootstrap the data to simulate estimation uncertainty and then
+run the EM algorithm to find the mode of the posterior for the
+bootstrapped data, which gives us fundamental uncertainty too <span class="citation">(see <a href="#ref-HonKin10">Honaker and King 2010</a>
 for details of the EMB algorithm)</span>.</p>
 <p>Once we have draws of the posterior of the complete-data parameters,
 we make imputations by drawing values of <span class="math inline">\(D^{mis}\)</span> from its distribution conditional
@@ -411,7 +409,7 @@ simulations of <span class="math inline">\(q\)</span> from each of the
 <span class="math inline">\(m\)</span> data sets, combine them into one
 set of <span class="math inline">\(m\)</span> simulations, and then to
 use the standard simulation-based methods of interpretation common for
-single data sets <span class="citation">King, Tomz, and Wittenberg (<a href="#ref-KinTomWit00" role="doc-biblioref">2000</a>)</span>.</p>
+single data sets <span class="citation">King, Tomz, and Wittenberg (<a href="#ref-KinTomWit00">2000</a>)</span>.</p>
 <p>Alternatively, you can combine directly and use as the multiple
 imputation estimate of this parameter, <span class="math inline">\(\bar{q}\)</span>, the average of the <span class="math inline">\(m\)</span> separate estimates, <span class="math inline">\(q_j\)</span> <span class="math inline">\((j=1,\dots,m)\)</span>:</p>
 <p><span class="math display">\[\begin{equation}
@@ -470,8 +468,8 @@ Perspective.”</span> <em>Multivariate Behavioral Research</em> 33 (4):
 <hr />
 <ol>
 <li id="fn1"><p>You can combine the results automatically by doing your
-data analyses within <a href="https://zeligproject.org">Zelig for R</a>,
-or within <a href="https://gking.harvard.edu/clarify">Clarify for
+data analyses within <a href="https://docs.zeligproject.org/index.html">Zelig for R</a>, or
+within <a href="https://gking.harvard.edu/clarify">Clarify for
 Stata</a>.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>

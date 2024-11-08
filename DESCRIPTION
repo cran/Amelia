@@ -1,11 +1,11 @@
 Package: Amelia
-Version: 1.8.2
-Date: 2024-04-10
+Version: 1.8.3
+Date: 2024-11-07
 Title: A Program for Missing Data
 Authors@R: c(
     person("James", "Honaker", email = "james@hona.kr", role = c("aut")),
     person("Gary", "King", email = "king@harvard.edu", role = c("aut")),
-    person("Matthew", "Blackwell", email = "mblackwell@gov.harvard.edu",
+    person("Matthew", "Blackwell", email = "mblackwell@gmail.com",
            role = c("aut", "cre"), comment = c(ORCID = "0000-0002-3689-9527"))
     )
 Depends: R (>= 3.0.2), Rcpp (>= 0.11)
@@ -32,14 +32,14 @@ License: GPL (>= 2)
 URL: https://gking.harvard.edu/amelia
 Suggests: tcltk, broom, rmarkdown, knitr
 VignetteBuilder: knitr
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2
 Encoding: UTF-8
 LazyData: true
 NeedsCompilation: yes
-Packaged: 2024-04-23 17:34:28 UTC; mblackwell
+Packaged: 2024-11-07 16:12:17 UTC; mblackwell
 Author: James Honaker [aut],
   Gary King [aut],
   Matthew Blackwell [aut, cre] (<https://orcid.org/0000-0002-3689-9527>)
-Maintainer: Matthew Blackwell <mblackwell@gov.harvard.edu>
+Maintainer: Matthew Blackwell <mblackwell@gmail.com>
 Repository: CRAN
-Date/Publication: 2024-04-23 21:00:13 UTC
+Date/Publication: 2024-11-08 00:50:02 UTC

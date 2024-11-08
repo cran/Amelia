@@ -11,7 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 
-<meta name="date" content="2024-04-23" />
+<meta name="date" content="2024-11-07" />
 
 <title>Using Amelia</title>
 
@@ -360,7 +360,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 
 <h1 class="title toc-ignore">Using Amelia</h1>
-<h4 class="date">2024-04-23</h4>
+<h4 class="date">2024-11-07</h4>
 
 
 
@@ -811,7 +811,7 @@ datasets,</p>
 ##                7                7               15               26 
 ##                6                7                8                9 
 ##               13                5               36               13 
-##  9.7802547928345 
+## 9.78025479283451 
 ##                1</code></pre>
 <p>we can see that there is one imputation between -4 and -3 and one
 imputation between 6 and 7. Again, the interpretation of these values is
@@ -847,7 +847,7 @@ did not. Of course, our first imputation did not limit the imputations
 to these two categories</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a><span class="fu">table</span>(a.out1<span class="sc">$</span>imputations[[<span class="dv">3</span>]]<span class="sc">$</span>signed)</span></code></pre></div>
 <pre><code>## 
-##  -0.58172703933406 -0.417310204209806                  0  0.914087081006918 
+##  -0.58172703933406 -0.417310204209806                  0  0.914087081006917 
 ##                  1                  1                142                  1 
 ##                  1 
 ##                 26</code></pre>
@@ -1505,11 +1505,10 @@ the <code>mi.combine()</code> function:</p>
 ## # ℹ 1 more variable: conf.high &lt;dbl&gt;</code></pre>
 <p>The combination of the results depends on the <a href="https://broom.tidymodels.org">broom</a> package and results can be
 combined if a <code>tidy()</code> method exists for the estimation
-function passed to <code>with()</code>. Other packages such as <a href="https://docs.zeligproject.org/index.html">Zelig</a> can also
-combine imputed data sets across a number of statistical models.
-Furthermore, users can easily export their imputations using the
-<code>write.amelia()</code> function as described in @ref(sec_saving)
-and use statistical packages other than R for the analysis model.</p>
+function passed to <code>with()</code>. Users can easily export their
+imputations using the <code>write.amelia()</code> function as described
+in @ref(sec_saving) and use statistical packages other than R for the
+analysis model.</p>
 <p>In addition to the resources available in R, users can draw on Stata
 to implement their analysis models. As of version 11, Stata has built-in
 handling of multiply imputed datasets. In order to utilize this
